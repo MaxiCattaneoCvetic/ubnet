@@ -4,7 +4,7 @@ Ubnet es una plataforma web diseñada para ofrecer servicios de Internet en la r
 
 ## 🚀 Tecnologías
 
-- **Backend**: Next.js (Node.js)
+- **Backend**: Next.js (Node.js) + TypeScript ⚡
 - **Base de datos**: MongoDB 🗃️
 - **Arquitectura**: MVC (Modelo-Vista-Controlador)
 - **Despliegue**: Google Cloud Platform ☁️
