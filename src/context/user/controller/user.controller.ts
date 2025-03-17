@@ -1,7 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post } from "@nestjs/common";
 
-import { UserRegisterDto } from "../models/user.register.dto";
-import { AuthServiceInterface } from "src/context/auth/service/auth.service.interface";
+import { UserRegisterDto } from "../models/dto/user.register.dto";
 import { UserServiceInterface } from "../service/user.service.interface";
 
 @Controller('register')

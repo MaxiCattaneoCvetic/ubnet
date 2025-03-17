@@ -1,8 +1,17 @@
 import { Injectable, Logger, LoggerService } from '@nestjs/common';
 
 @Injectable()
-export class MyLoggerService implements LoggerService {
-  private readonly logger = new Logger('Publicite-Log');
+export class UbnetLoggerService implements LoggerService {
+  private readonly logger = new Logger('UBNET-LOGGER');
+  private static instance: UbnetLoggerService | null = null;
+
+  public static getInstance(): UbnetLoggerService {
+    if (!UbnetLoggerService.instance) {
+      UbnetLoggerService.instance = new UbnetLoggerService();
+    }
+    return UbnetLoggerService.instance;
+  }
+
 
   log(message: string) {
     this.logger.log(message);

@@ -1,46 +1,32 @@
-import * as bcrypt from 'bcrypt';
-
-
-
-import { UserRegisterDto } from "../models/user.register.dto";
+import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
+import { UserRegisterDto } from "../models/dto/user.register.dto";
+import { User } from "../models/entity/user.entity";
 import { UserServiceInterface } from "./user.service.interface";
+import passwordHasher from "./utils/passwordHasher";
+import { UserRepository } from "../repository/user.repository";
+import { Inject } from "@nestjs/common";
+
+
+
 export class UserService implements UserServiceInterface {
 
-    private users: any[];
-    private readonly saltOrRounds: number
+
 
     constructor(
-
-
+        @Inject('UserRepositoryInterface')
+        private readonly userRepository: UserRepository
     ) {
-        this.users = [
-            {
-                userId: 1,
-                username: 'john',
-                password: 'changeme',
-            },
-            {
-                userId: 2,
-                username: 'maria',
-                password: 'guess',
-            },
-        ];
-        this.saltOrRounds = 13;
+
     }
 
-
-
-
-    async findOne(username: string) {
-        return this.users.find(user => user.username === username);
-    }
 
     async register(userRegisterDto: UserRegisterDto): Promise<any> {
         try {
-            // this.logger.log('Registering user.....');
-            const paswordHashed = await bcrypt.hash(userRegisterDto.password, this.saltOrRounds);
-            console.log(paswordHashed)
-            return Promise.resolve(userRegisterDto);
+            UbnetLoggerService.getInstance().log('Creating user with email: ' + userRegisterDto.email);
+            const paswordHashed = await passwordHasher(userRegisterDto.password);
+            const user = new User(userRegisterDto.name, userRegisterDto.lastName, userRegisterDto.email, paswordHashed);
+            await this.userRepository.saveUser(user);
+            return user.toUser();
         } catch (error: any) {
             throw error;
         }

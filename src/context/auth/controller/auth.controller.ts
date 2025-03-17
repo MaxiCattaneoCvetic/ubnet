@@ -11,11 +11,11 @@ export class AuthController {
     ) { }
 
 
-    @HttpCode(HttpStatus.OK)
-    @Post('login')
-    login(@Body() signInDto: Record<string, any>) {
-        return this.authService.login(signInDto.username, signInDto.password);
-    }
+    // @HttpCode(HttpStatus.OK)
+    // @Post('login')
+    // login(@Body() signInDto: Record<string, any>) {
+    //     return this.authService.login(signInDto.username, signInDto.password);
+    // }
 
     @HttpCode(HttpStatus.OK)
     @Get('status')

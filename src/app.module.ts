@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './context/user/user.module';
 import { AuthModule } from './context/auth/auth.module';
 import { LoggerModule } from './context/shared/logger/logger.module';
+import { DatabaseModule } from './context/shared/database/database.module';
 
 
 @Module({
@@ -14,7 +15,8 @@ import { LoggerModule } from './context/shared/logger/logger.module';
       envFilePath: '.env', // Indica el archivo donde están las variables
     }),
     AuthModule,
-    UserModule
+    UserModule,
+    DatabaseModule
   ],
   providers: [],
 })
