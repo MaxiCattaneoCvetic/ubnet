@@ -6,6 +6,7 @@ import { User } from "../models/entity/user.entity";
 import { UserRepositoryInterface } from "./user.repository.interface";
 import { UserDocument, UserModel } from "../models/schemas/user.schema";
 import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
+import { BadRequestException } from "@nestjs/common";
 
 export class UserRepository implements UserRepositoryInterface {
 
@@ -17,6 +18,8 @@ export class UserRepository implements UserRepositoryInterface {
     async saveUser(user: User): Promise<any> {
         try {
             const userDocument = new this.userModel(user);
+            const disponibility = await this.checkDisponibility()
+            if (!disponibility) throw new BadRequestException("Max users reached")
             await userDocument.save();
             UbnetLoggerService.getInstance().log('User saved Successfully');
         } catch (error: any) {
@@ -25,6 +28,15 @@ export class UserRepository implements UserRepositoryInterface {
         }
     }
 
+    async checkDisponibility(): Promise<boolean> {
+        try {
+            const user = await this.userModel.find();
+            if (user.length > 3) return false;
+            return true;
+        } catch (error: any) {
+            throw error;
+        }
+    }
 
 
 }
