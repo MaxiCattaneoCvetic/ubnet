@@ -18,5 +18,5 @@ Ubnet es una plataforma web diseñada para ofrecer servicios de Internet en la r
    Los administradores podrán actualizar y modificar los banners, la información de la página principal y otras secciones de contenido para mantener la web siempre actualizada con la última información relevante.
 
 ### 3. **Mapa Interactivo de Cobertura**
-   Los usuarios podrán ver un mapa interactivo que les permitirá comprobar la cobertura de Ubnet en su área, lo que les permitirá saber si pueden acceder a los servicios de Internet en su ubicación.
+   Los usuarios podrán ver un mapa interactivo que les permitirá comprobar la cobertura de Ubnet en su área, lo que les permitirá saber si pueden acceder a los servicios de Internet en su ubicación. Adicionalmente los administradores de Ubnet podran marcar las zonas de cobertura en el mapa. 
 
