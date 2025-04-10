@@ -1,7 +1,7 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, UseGuards, NotFoundException } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, UseGuards, NotFoundException, Put } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse } from "@nestjs/swagger";
 
-import { AdvertiserBannerCreateDto, AdvertiserBannerCreateDto_response } from "../models/dto/advertiserbanner.create.dto";
+import { AdvertiserBannerCreateDto, AdvertiserBannerCreateDto_response, AdvertiserBannerUpdateDto } from "../models/dto/advertiserbanner.create.dto";
 import { AdvertiserBannerServiceInterface } from "../service/advertiserBanner.service.interface";
 import { AuthGuard } from "src/context/auth/guard/auth.guard";
 
@@ -64,4 +64,25 @@ export class AdvertiserBannerController {
             throw error;
         }
     }
+
+    @HttpCode(HttpStatus.OK)
+    @Put()
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth('JWT-auth')
+    @ApiBody({ type: AdvertiserBannerUpdateDto, description: 'Nuevo Banner' })
+    @ApiResponse({ status: 200, description: 'Banner editado correctaente', type: AdvertiserBannerCreateDto_response })
+    @ApiResponse({ status: 404, description: 'Banner no encontrado' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    async updateBannerById(@Body() advertiserBannerUpdateDto: AdvertiserBannerUpdateDto) {
+        try {
+            const advertiserBanner = await this.advertiserBannerService.updateBannerById(advertiserBannerUpdateDto);
+            if (!advertiserBanner) {
+                throw new NotFoundException(`Banner with ID ${advertiserBannerUpdateDto._id} not found`);
+            }
+            return advertiserBanner;
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
 }

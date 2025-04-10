@@ -14,6 +14,32 @@ export class AdvertiserBannerCreateDto {
     readonly imageUrl: string;
 }
 
+export class AdvertiserBannerUpdateDto {
+
+    @ApiProperty({
+        example: "1234",
+    })
+    readonly _id: string;
+
+
+    @ApiProperty({
+        example: "Winter Sale updated",
+    })
+    readonly description: string;
+
+    @ApiProperty({
+        example: "https://image.com/1234",
+    })
+    readonly imageUrl: string;
+
+
+    @ApiProperty({
+        example: false
+    })
+    readonly isActive: Boolean;
+
+}
+
 
 
 export class AdvertiserBannerCreateDto_response extends AdvertiserBannerCreateDto {

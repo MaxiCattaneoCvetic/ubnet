@@ -5,6 +5,7 @@ import { AdvertiserBannerRepositoryInterface } from "./advertiserBanner.reposito
 import { AdvertiserBannerDocument, AdvertiserBannerModel } from "../models/schema/advertiserBanner.schema";
 import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
 import { AdvertiserBanner } from "../models/entity/advertiserBanner.entity";
+import { AdvertiserBannerUpdateDto } from "../models/dto/advertiserbanner.create.dto";
 
 export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInterface {
 
@@ -12,6 +13,7 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
         @InjectModel(AdvertiserBannerModel.modelName)
         private readonly advertiserBannerModel: Model<AdvertiserBannerDocument>
     ) { }
+
 
     async findById(id: string): Promise<AdvertiserBanner | null> {
         try {
@@ -22,7 +24,7 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
     }
 
     async findAll(): Promise<AdvertiserBanner[]> {
-        try {   
+        try {
             return await this.advertiserBannerModel.find();
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error finding all advertiser banners', error);
@@ -40,6 +42,16 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
             return advertiserBannerDocument;
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error saving advertiser banner', error);
+            throw error;
+        }
+    }
+
+    async updateBannerById(_id: string, advertiserBanner: AdvertiserBannerUpdateDto): Promise<any> {
+        try {
+
+            return await this.advertiserBannerModel.findByIdAndUpdate(_id, advertiserBanner, { new: true });
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error updating advertiser banner', error);
             throw error;
         }
     }

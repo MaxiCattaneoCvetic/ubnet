@@ -1,10 +1,11 @@
-import { Inject } from "@nestjs/common";
+import { BadRequestException, Inject } from "@nestjs/common";
 
-import { AdvertiserBannerCreateDto } from "../models/dto/advertiserbanner.create.dto";
+import { AdvertiserBannerCreateDto, AdvertiserBannerUpdateDto } from "../models/dto/advertiserbanner.create.dto";
 import { AdvertiserBannerServiceInterface } from "./advertiserBanner.service.interface";
 import { AdvertiserBannerRepositoryInterface } from "../repository/advertiserBanner.repository.interface";
 import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
 import { AdvertiserBanner } from "../models/entity/advertiserBanner.entity";
+import { createObjectWithoutUndefined } from "../function/object.factory.create";
 
 export class AdvertiserBannerService implements AdvertiserBannerServiceInterface {
 
@@ -13,6 +14,25 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
         private readonly advertiserBannerRepository: AdvertiserBannerRepositoryInterface
     ) { }
 
+
+    async updateBannerById(advertiserBannerUpdate: AdvertiserBannerUpdateDto): Promise<any> {
+        try {
+            const _id = advertiserBannerUpdate._id;
+            if (!_id) throw new BadRequestException('Id is required');
+            UbnetLoggerService.getInstance().log('Updating advertiser banner in service... id: ' + _id);
+
+            const advertiserBannerDataToUpdate: any = createObjectWithoutUndefined(advertiserBannerUpdate);
+            const advertiserBannerUpdted = await this.advertiserBannerRepository.updateBannerById(_id, advertiserBannerDataToUpdate);
+            if (!advertiserBannerUpdted) return null;
+            UbnetLoggerService.getInstance().log('Advertiser banner updated Successfully');
+            return advertiserBannerUpdted;
+
+       
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error updating advertiser banner', error);
+            throw error;
+        }
+    }
 
     async create(advertiserBannerCreateDto: AdvertiserBannerCreateDto): Promise<any> {
         try {
@@ -50,7 +70,7 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
             UbnetLoggerService.getInstance().log('Finding all advertiser banners in service...');
             const advertiserBanners = await this.advertiserBannerRepository.findAll();
             return advertiserBanners;
-            } catch (error: any) {
+        } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error finding all advertiser banners', error);
             throw error;
         }
