@@ -13,6 +13,7 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
         private readonly advertiserBannerRepository: AdvertiserBannerRepositoryInterface
     ) { }
 
+
     async create(advertiserBannerCreateDto: AdvertiserBannerCreateDto): Promise<any> {
         try {
             UbnetLoggerService.getInstance().log('Saving advertiser banner in service...');
@@ -40,6 +41,17 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
             return advertiserBanner;
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error finding advertiser banner', error);
+            throw error;
+        }
+    }
+
+    async findAll(): Promise<AdvertiserBanner[]> {
+        try {
+            UbnetLoggerService.getInstance().log('Finding all advertiser banners in service...');
+            const advertiserBanners = await this.advertiserBannerRepository.findAll();
+            return advertiserBanners;
+            } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error finding all advertiser banners', error);
             throw error;
         }
     }

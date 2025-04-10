@@ -1,7 +1,6 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from 'mongoose';
 
-import { AdvertiserBannerCreateDto } from "../models/dto/advertiserbanner.create.dto";
 import { AdvertiserBannerRepositoryInterface } from "./advertiserBanner.repository.interface";
 import { AdvertiserBannerDocument, AdvertiserBannerModel } from "../models/schema/advertiserBanner.schema";
 import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
@@ -13,6 +12,7 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
         @InjectModel(AdvertiserBannerModel.modelName)
         private readonly advertiserBannerModel: Model<AdvertiserBannerDocument>
     ) { }
+
     async findById(id: string): Promise<AdvertiserBanner | null> {
         try {
             return await this.advertiserBannerModel.findById(id);
@@ -20,6 +20,16 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
             throw error;
         }
     }
+
+    async findAll(): Promise<AdvertiserBanner[]> {
+        try {   
+            return await this.advertiserBannerModel.find();
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error finding all advertiser banners', error);
+            throw error;
+        }
+    }
+
 
 
     async save(advertiserBanner: AdvertiserBanner): Promise<any> {

@@ -1,16 +1,17 @@
+import passwordHasher from "./utils/passwordHasher";
+
 import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
 import { UserRegisterDto } from "../models/dto/user.register.dto";
 import { User } from "../models/entity/user.entity";
 import { UserServiceInterface } from "./user.service.interface";
-import passwordHasher from "./utils/passwordHasher";
+
 import { UserRepository } from "../repository/user.repository";
 import { Inject } from "@nestjs/common";
 
 
 
+
 export class UserService implements UserServiceInterface {
-
-
 
     constructor(
         @Inject('UserRepositoryInterface')
@@ -28,7 +29,8 @@ export class UserService implements UserServiceInterface {
             await this.userRepository.saveUser(user);
             return user.toUser();
         } catch (error: any) {
-            throw error;
+            UbnetLoggerService.getInstance().error('Error creating user: ' + error.message);
+            throw new Error(error.message);
         }
     }
 
