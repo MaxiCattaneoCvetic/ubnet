@@ -4,8 +4,9 @@ import { AdvertiserBannerService } from './service/advertiserBanner.service';
 import { AdvertiserBannerController } from './controller/advertiserBanner.controller';
 import { AdvertiserBannerModel } from './models/schema/advertiserBanner.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from '../auth/auth.module';
+
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from '../Shared/auth/auth.module';
 
 @Module({
     imports: [
