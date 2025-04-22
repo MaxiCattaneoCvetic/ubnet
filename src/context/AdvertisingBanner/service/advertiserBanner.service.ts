@@ -3,7 +3,7 @@ import { BadRequestException, Inject } from "@nestjs/common";
 import { AdvertiserBannerCreateDto, AdvertiserBannerUpdateDto } from "../models/dto/advertiserbanner.create.dto";
 import { AdvertiserBannerServiceInterface } from "./advertiserBanner.service.interface";
 import { AdvertiserBannerRepositoryInterface } from "../repository/advertiserBanner.repository.interface";
-import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
+import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 import { AdvertiserBanner } from "../models/entity/advertiserBanner.entity";
 import { createObjectWithoutUndefined } from "../function/object.factory.create";
 

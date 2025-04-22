@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import { User } from "../models/entity/user.entity";
 import { UserRepositoryInterface } from "./user.repository.interface";
 import { UserDocument, UserModel } from "../models/schemas/user.schema";
-import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
+import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 import { BadRequestException } from "@nestjs/common";
 
 export class UserRepository implements UserRepositoryInterface {

@@ -1,0 +1,5 @@
+#DATABASE CONGIF
+DATABASE_URI=mongodb+srv://dutsiland:4ZlHdv8qrCPi4KWC@cluster0.eh8ip.mongodb.net/ubnet_database?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=ASD
+
+

@@ -1,6 +1,6 @@
 import { omitBy, isUndefined } from 'lodash';
 
-import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
+import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 export function createObjectWithoutUndefined(object: any) {
     try {
         return omitBy(object, isUndefined);

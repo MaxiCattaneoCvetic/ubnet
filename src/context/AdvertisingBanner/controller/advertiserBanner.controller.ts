@@ -3,7 +3,8 @@ import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse } from "@nestjs/swagger";
 
 import { AdvertiserBannerCreateDto, AdvertiserBannerCreateDto_response, AdvertiserBannerUpdateDto } from "../models/dto/advertiserbanner.create.dto";
 import { AdvertiserBannerServiceInterface } from "../service/advertiserBanner.service.interface";
-import { AuthGuard } from "src/context/auth/guard/auth.guard";
+import { AuthGuard } from "src/context/Shared/auth/guard/auth.guard";
+
 
 @Controller('banner')
 export class AdvertiserBannerController {
@@ -12,10 +13,10 @@ export class AdvertiserBannerController {
         private readonly advertiserBannerService: AdvertiserBannerServiceInterface
     ) { }
 
+    @Post()
     @HttpCode(HttpStatus.CREATED)
     @UseGuards(AuthGuard)
     @ApiBearerAuth('JWT-auth')
-    @Post()
     @ApiBody({ type: AdvertiserBannerCreateDto })
     @ApiResponse({ status: 201, description: 'Banner created', type: AdvertiserBannerCreateDto_response })
     @ApiResponse({ status: 404, description: 'Bad request, check your payload' })

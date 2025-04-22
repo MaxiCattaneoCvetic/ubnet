@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import { UserModule } from './context/user/user.module';
-import { AuthModule } from './context/auth/auth.module';
-import { LoggerModule } from './context/shared/logger/logger.module';
-import { DatabaseModule } from './context/shared/database/database.module';
+import { UserModule } from './context/User/user.module';
+import { LoggerModule } from './context/Shared/logger/logger.module';
+import { DatabaseModule } from './context/Shared/database/database.module';
 import { AdvertiserBannerModule } from './context/AdvertisingBanner/advertiser.module';
+import { AuthModule } from './context/Shared/auth/auth.module';
 
 
 @Module({

@@ -6,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { LoginDto, LoginDto_response } from '../models/dto/login.dto';
 import { AuthServiceInterface } from './auth.service.interface';
 import { UserAuthRepositoryInterface } from '../repository/auth.repository.interface';
-import { UbnetLoggerService } from 'src/context/shared/logger/logger.service';
+import { UbnetLoggerService } from 'src/context/Shared/logger/logger.service';
 
 
 @Injectable()

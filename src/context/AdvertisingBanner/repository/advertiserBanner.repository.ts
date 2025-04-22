@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 
 import { AdvertiserBannerRepositoryInterface } from "./advertiserBanner.repository.interface";
 import { AdvertiserBannerDocument, AdvertiserBannerModel } from "../models/schema/advertiserBanner.schema";
-import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
+import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 import { AdvertiserBanner } from "../models/entity/advertiserBanner.entity";
 import { AdvertiserBannerUpdateDto } from "../models/dto/advertiserbanner.create.dto";
 

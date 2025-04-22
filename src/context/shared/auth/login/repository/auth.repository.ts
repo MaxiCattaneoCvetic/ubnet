@@ -3,7 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { UserAuthRepositoryInterface } from "./auth.repository.interface";
-import { UserDocument, UserModel } from "src/context/user/models/schemas/user.schema";
+import { UserDocument, UserModel } from "src/context/User/models/schemas/user.schema";
 
 
 export class UserAuthRepository implements UserAuthRepositoryInterface {

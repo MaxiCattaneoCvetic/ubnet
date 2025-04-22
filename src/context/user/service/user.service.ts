@@ -1,6 +1,6 @@
 import passwordHasher from "./utils/passwordHasher";
 
-import { UbnetLoggerService } from "src/context/shared/logger/logger.service";
+import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 import { UserRegisterDto } from "../models/dto/user.register.dto";
 import { User } from "../models/entity/user.entity";
 import { UserServiceInterface } from "./user.service.interface";
