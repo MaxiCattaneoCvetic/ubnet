@@ -1,8 +1,9 @@
-import { Controller, Get, HttpCode, HttpStatus, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { SubscriptionPlanServiceInterface } from "../service/subscriptionPlan.service.interface";
 import { AuthGuard } from "src/context/Shared/auth/guard/auth.guard";
 import { ApiBearerAuth, ApiBody, ApiResponse } from "@nestjs/swagger";
 import { SubscriptionPlanCreateDto, SubscriptionPlanResponseDto } from "../models/dto/subscriptionPlans.dto";
+import { SubscriptionPlanUpdateDto } from "../models/dto/subscriptionPlanUpdate.dto";
 
 @Controller('plans')
 export class SubscriptionPlanController {
@@ -32,12 +33,26 @@ export class SubscriptionPlanController {
         }
     }
 
+    @Put(":id")
+    @ApiResponse({ status: 201, description: 'Subscriptions Plan successfully updated', type: [SubscriptionPlanResponseDto] })
+    @ApiResponse({ status: 404, description: 'Subscriptions Plan not found' })
+    @ApiResponse({ status: 400, description: 'Bad request, request body is invalid' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    @ApiBody({ type: SubscriptionPlanUpdateDto })
+    async updateSubscriptionPlanById(@Param('id') id: string, @Body() subscriptionPlanUpdateDto: SubscriptionPlanUpdateDto): Promise<any> {
+        try {
+            return this.subscriptionPlanService.updateSubscriptionPlanById(id, subscriptionPlanUpdateDto);
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
 
 
     @Get(":id")
     @HttpCode(HttpStatus.OK)
     @ApiResponse({ status: 201, description: 'Subscription Plan found', type: SubscriptionPlanResponseDto })
-    @ApiResponse({ status: 404, description: 'Subscription Plan not found'})
+    @ApiResponse({ status: 404, description: 'Subscription Plan not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async findSubscriptionPlanById(id: string): Promise<any> {
         try {
@@ -51,7 +66,7 @@ export class SubscriptionPlanController {
 
     @Get()
     @ApiResponse({ status: 201, description: 'Subscriptions Plan found', type: [SubscriptionPlanResponseDto] })
-    @ApiResponse({ status: 404, description: 'Subscriptions Plan not found'})
+    @ApiResponse({ status: 404, description: 'Subscriptions Plan not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async findAllSubscriptionPlans(): Promise<any> {
         try {

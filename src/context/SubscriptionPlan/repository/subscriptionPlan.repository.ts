@@ -3,9 +3,10 @@ import { SubscriptionPlanRepositoryInterface } from "./subscriptionPlan.reposito
 import { CameraPlanEntity } from "../models/entity/camera.plan.entity";
 import { InternetPlanEntity } from "../models/entity/internet.plan.entity";
 import { Model } from "mongoose";
-import { InternetPlanDocument, InternetPlanModel, InternetPlanSchema } from "../models/schema/internet.plan.schema";
+import { InternetPlanDocument, InternetPlanModel } from "../models/schema/internet.plan.schema";
 import { CameraPlanDocument, CameraPlanModel } from "../models/schema/camera.plan.schema";
 import { SubscriptionPlanDocument, SubscriptionPlanModel } from "../models/schema/subscriptionPlan.schema";
+import { SubscriptionPlanUpdateDto } from "../models/dto/subscriptionPlanUpdate.dto";
 
 export class SubscriptionPlanRepository implements SubscriptionPlanRepositoryInterface {
 
@@ -20,6 +21,7 @@ export class SubscriptionPlanRepository implements SubscriptionPlanRepositoryInt
         private readonly subscriptionPlanModel: Model<SubscriptionPlanDocument>,
 
     ) { }
+
 
 
     async saveInternetPlan(internetPlan: InternetPlanEntity): Promise<any> {
@@ -61,6 +63,13 @@ export class SubscriptionPlanRepository implements SubscriptionPlanRepositoryInt
 
 
 
+    async updateSubscriptionPlanById(id: string, subscriptionPlanUpdateDto: Partial<SubscriptionPlanUpdateDto>): Promise<any> {
+        try {
+            return await this.subscriptionPlanModel.updateOne({ _id: id }, subscriptionPlanUpdateDto);
+        } catch (error: any) {
+            throw error;
+        }
+    }
 
 
 

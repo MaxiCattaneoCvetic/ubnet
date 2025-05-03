@@ -9,12 +9,15 @@ import { CameraPlanEntity } from "../models/entity/camera.plan.entity";
 import { InternetPlanEntity } from "../models/entity/internet.plan.entity";
 import { SubscriptionPlan } from "../models/entity/subscriptionPlan.entity";
 import { PlanType } from "../models/entity/enums/planType.enum";
+import { SubscriptionPlanUpdateDto } from "../models/dto/subscriptionPlanUpdate.dto";
+import { createObjectWithoutUndefined } from "src/context/AdvertisingBanner/function/object.factory.create";
 
 export class SubscriptionPlanService implements SubscriptionPlanServiceInterface {
 
     constructor(
         @Inject('SubscriptionPlanRepositoryInterface')
         private readonly subscriptionPlanRepository: SubscriptionPlanRepositoryInterface,
+
     ) { }
 
 
@@ -29,13 +32,13 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
             if (subscriptionPlanDto.type === PlanType.INTERNET) {
                 const internetPlan = this.makeInternetSubscription(subscriptionPlanDto);
                 const interetPlanCreated = await this.subscriptionPlanRepository.saveInternetPlan(internetPlan);
-                UbnetLoggerService.getInstance().log( PlanType.INTERNET + ' plan saved Successfully');
+                UbnetLoggerService.getInstance().log(PlanType.INTERNET + ' plan saved Successfully');
                 return interetPlanCreated;
 
             } else if (subscriptionPlanDto.type === PlanType.CAMERA) {
                 const cameraPlan = this.makeCameraSubscription(subscriptionPlanDto);
                 const cameraPlanCreated = await this.subscriptionPlanRepository.saveCameraPlan(cameraPlan);
-                UbnetLoggerService.getInstance().log( PlanType.CAMERA + ' plan saved Successfully');
+                UbnetLoggerService.getInstance().log(PlanType.CAMERA + ' plan saved Successfully');
                 return cameraPlanCreated;
             }
 
@@ -48,6 +51,8 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
             throw error;
         }
     }
+
+
 
     private makeInternetSubscription(subscriptionPlanDto: SubscriptionPlanCreateDto): InternetPlanEntity {
         const basePlanSubscription = this.makeBasePlan(subscriptionPlanDto);
@@ -99,6 +104,20 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
             throw error;
         }
     }
+
+
+    async updateSubscriptionPlanById(id: string, subscriptionPlanUpdateDto: SubscriptionPlanUpdateDto): Promise<any> {
+        try {
+            UbnetLoggerService.getInstance().log('Updating plan: ' + id);
+            const objetToUpdate = createObjectWithoutUndefined(subscriptionPlanUpdateDto);
+            return await this.subscriptionPlanRepository.updateSubscriptionPlanById(id, objetToUpdate);
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error updating plan: ' + error.message);
+            throw error;
+        }
+    }
+
+
 
 
 
