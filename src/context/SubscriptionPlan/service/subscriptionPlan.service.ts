@@ -8,6 +8,7 @@ import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 import { CameraPlanEntity } from "../models/entity/camera.plan.entity";
 import { InternetPlanEntity } from "../models/entity/internet.plan.entity";
 import { SubscriptionPlan } from "../models/entity/subscriptionPlan.entity";
+import { PlanType } from "../models/entity/enums/planType.enum";
 
 export class SubscriptionPlanService implements SubscriptionPlanServiceInterface {
 
@@ -25,16 +26,16 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
                 throw new BadRequestException("Plan type is required");
             }
 
-            if (subscriptionPlanDto.type === "a") {
+            if (subscriptionPlanDto.type === PlanType.INTERNET) {
                 const internetPlan = this.makeInternetSubscription(subscriptionPlanDto);
                 const interetPlanCreated = await this.subscriptionPlanRepository.saveInternetPlan(internetPlan);
-                UbnetLoggerService.getInstance().log('Internet plan saved Successfully');
+                UbnetLoggerService.getInstance().log( PlanType.INTERNET + ' plan saved Successfully');
                 return interetPlanCreated;
 
-            } else if (subscriptionPlanDto.type === "b") {
+            } else if (subscriptionPlanDto.type === PlanType.CAMERA) {
                 const cameraPlan = this.makeCameraSubscription(subscriptionPlanDto);
                 const cameraPlanCreated = await this.subscriptionPlanRepository.saveCameraPlan(cameraPlan);
-                UbnetLoggerService.getInstance().log('Camera plan saved Successfully');
+                UbnetLoggerService.getInstance().log( PlanType.CAMERA + ' plan saved Successfully');
                 return cameraPlanCreated;
             }
 

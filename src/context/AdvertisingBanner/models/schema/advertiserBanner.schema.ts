@@ -1,4 +1,4 @@
-import { Schema, model, Document, Date } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 interface AdvertiserBannerDocument extends Document {
     description: string;

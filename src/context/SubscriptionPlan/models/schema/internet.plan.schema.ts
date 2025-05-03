@@ -6,7 +6,7 @@ import { model } from 'mongoose';
 
 @Schema()
 export class InternetPlanDocument extends SubscriptionPlanDocument {
-    @Prop({ required: true })
+    @Prop({ required: true, type: Boolean })
     isFeature: boolean;
 
     @Prop({ required: true })

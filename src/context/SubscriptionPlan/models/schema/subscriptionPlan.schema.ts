@@ -1,33 +1,34 @@
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, model } from 'mongoose';
+import { PlanType } from '../entity/enums/planType.enum';
 
 @Schema({
     discriminatorKey: 'type',
 })
 export class SubscriptionPlanDocument extends Document {
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     title: string;
 
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     detail: string;
 
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     price: string;
 
-    @Prop({ required: true })
+    @Prop({ type: Boolean, required: true })
     isActive: boolean;
 
-    @Prop({ required: true })
+    @Prop({ type: String, required: true })
     region: string;
 
-    @Prop({ required: true })
+    @Prop({ type: String, enum: [PlanType.CAMERA, PlanType.INTERNET], required: true })
     type: string;
 
-    @Prop({ required: true })
+    @Prop({ type: Boolean, required: true })
     isPromotionPlan: boolean;
 
-    @Prop({ required: false })
+    @Prop({ type: String, required: false })
     sideText?: string;
 }
 

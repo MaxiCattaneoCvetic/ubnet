@@ -2,7 +2,7 @@ import { Controller, Get, HttpCode, HttpStatus, Inject, Post, UseGuards } from "
 import { SubscriptionPlanServiceInterface } from "../service/subscriptionPlan.service.interface";
 import { AuthGuard } from "src/context/Shared/auth/guard/auth.guard";
 import { ApiBearerAuth, ApiBody, ApiResponse } from "@nestjs/swagger";
-import { SubscriptionPlanCreateDto } from "../models/dto/subscriptionPlans.dto";
+import { SubscriptionPlanCreateDto, SubscriptionPlanResponseDto } from "../models/dto/subscriptionPlans.dto";
 
 @Controller('plans')
 export class SubscriptionPlanController {
@@ -33,8 +33,12 @@ export class SubscriptionPlanController {
     }
 
 
-    // TODO : DOCUMENTATION FINNDS
+
     @Get(":id")
+    @HttpCode(HttpStatus.OK)
+    @ApiResponse({ status: 201, description: 'Subscription Plan found', type: SubscriptionPlanResponseDto })
+    @ApiResponse({ status: 404, description: 'Subscription Plan not found'})
+    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async findSubscriptionPlanById(id: string): Promise<any> {
         try {
             return this.subscriptionPlanService.findById(id);
@@ -46,6 +50,9 @@ export class SubscriptionPlanController {
 
 
     @Get()
+    @ApiResponse({ status: 201, description: 'Subscriptions Plan found', type: [SubscriptionPlanResponseDto] })
+    @ApiResponse({ status: 404, description: 'Subscriptions Plan not found'})
+    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async findAllSubscriptionPlans(): Promise<any> {
         try {
             return this.subscriptionPlanService.findAll();

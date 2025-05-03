@@ -81,13 +81,15 @@ export class SubscriptionPlanCreateDto {
 
     })
     isFeature: boolean;
-
-
-
-
-
-
 }
 
 
+export class SubscriptionPlanResponseDto extends SubscriptionPlanCreateDto {
+    @ApiProperty({
+        description: 'Id of subscription plan',
+        example: "1234",
+        type: String
+    })
+    readonly _id: string
 
+}
