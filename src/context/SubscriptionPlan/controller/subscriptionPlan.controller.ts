@@ -23,7 +23,7 @@ export class SubscriptionPlanController {
     @ApiBearerAuth('JWT-auth')
     @ApiBody({ type: SubscriptionPlanCreateDto })
     @ApiResponse({ status: 201, description: 'Plan created', type: SubscriptionPlanCreateDto })
-    @ApiResponse({ status: 404, description: 'Plan has not been created, check your payload' })
+    @ApiResponse({ status: 400, description: 'Plan has not been created, check your payload' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async createSubscriptionPlan(subscriptionPlanDto: SubscriptionPlanCreateDto): Promise<any> {
         try {
