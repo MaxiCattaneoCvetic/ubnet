@@ -51,7 +51,7 @@ export class SubscriptionPlanController {
 
     @Get(":id")
     @HttpCode(HttpStatus.OK)
-    @ApiResponse({ status: 201, description: 'Subscription Plan found', type: SubscriptionPlanResponseDto })
+    @ApiResponse({ status: 200, description: 'Subscription Plan found', type: SubscriptionPlanResponseDto })
     @ApiResponse({ status: 404, description: 'Subscription Plan not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async findSubscriptionPlanById(id: string): Promise<any> {
@@ -65,7 +65,7 @@ export class SubscriptionPlanController {
 
 
     @Get()
-    @ApiResponse({ status: 201, description: 'Subscriptions Plan found', type: [SubscriptionPlanResponseDto] })
+    @ApiResponse({ status: 200, description: 'Subscriptions Plan found', type: [SubscriptionPlanResponseDto] })
     @ApiResponse({ status: 404, description: 'Subscriptions Plan not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async findAllSubscriptionPlans(): Promise<any> {
