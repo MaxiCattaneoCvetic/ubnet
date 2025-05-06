@@ -22,7 +22,7 @@ export class SubscriptionPlanDocument extends Document {
     @Prop({ type: String, required: true })
     region: string;
 
-    @Prop({ type: String, enum: [PlanType.CAMERA, PlanType.INTERNET], required: true })
+    @Prop({ type: String, enum: [PlanType.CAMERA, PlanType.FIBER, PlanType.FIVEG], required: true })
     type: string;
 
     @Prop({ type: Boolean, required: true })
