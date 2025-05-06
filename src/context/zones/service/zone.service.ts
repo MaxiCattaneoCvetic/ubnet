@@ -10,7 +10,7 @@ import { Zone } from "../models/entity/zone.entity";
 export class ZoneService implements ZoneServiceInterface {
 
     constructor(
-        @Inject("ZoneServiceInterface")
+        @Inject("ZoneRepositoryInterface")
         private readonly zoneRepository: ZoneRepositoryInterface
     ) { }
 
