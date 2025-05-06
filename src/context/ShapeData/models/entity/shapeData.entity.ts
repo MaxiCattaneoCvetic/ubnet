@@ -10,6 +10,7 @@ export class ShapeData {
     private polygon?: PolygonData;
 
 
+
     constructor(type: ShapeDataType, clientId: string, circle?: CircleData, polygon?: PolygonData) {
         this.type = type;
         this.clientId = clientId;

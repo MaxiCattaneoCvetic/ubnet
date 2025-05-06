@@ -5,6 +5,7 @@ import { ExpressAdapter, NestExpressApplication } from '@nestjs/platform-express
 import * as express from 'express';
 
 import { AppModule } from './app.module';
+import { ShapeDataCircleCreateDto, ShapeDataPolygonCreateDto } from './context/ShapeData/models/dto/shapeData.create.dto';
 
 const expressServer = express();
 let app: NestExpressApplication;
@@ -31,11 +32,12 @@ const initializeNestApp = async (): Promise<NestExpressApplication> => {
           description: 'Enter JWT token',
           in: 'header',
         },
-        'JWT-auth', 
+        'JWT-auth',
       )
+
       .build();
 
-    const documentFactory = () => SwaggerModule.createDocument(app, config);
+    const documentFactory = () => SwaggerModule.createDocument(app, config, { extraModels: [ShapeDataCircleCreateDto, ShapeDataPolygonCreateDto] });
     SwaggerModule.setup('api', app, documentFactory, {
       swaggerOptions: {
         persistAuthorization: true,

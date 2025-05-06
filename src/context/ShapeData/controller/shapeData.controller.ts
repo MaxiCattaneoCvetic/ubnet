@@ -19,13 +19,13 @@ export class ShapeDataController {
 
 
 
-
     @Post()
     @HttpCode(HttpStatus.CREATED)
     @UseGuards(AuthGuard)
     @ApiBearerAuth('JWT-auth')
     @ApiBody({
         description: 'Shape data (Circle or Polygon)',
+        required: true,
         schema: {
             discriminator: {
                 propertyName: 'type',
@@ -40,17 +40,18 @@ export class ShapeDataController {
             ],
         },
     })
-    @ApiResponse({ status: 201, description: 'Zone Coverage Shape has been created', type: ShapeDataResponseDto })
+    @ApiResponse({
+        status: 201,
+        description: 'Zone Coverage Shape has been created',
+        type: ShapeDataResponseDto
+    })
     @ApiResponse({ status: 400, description: 'Bad Request' })
-    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
-    async createZoneCoverageShapes(@Body() shapeDataCreateDto: ShapeDataCircleCreateDto | ShapeDataPolygonCreateDto): Promise<any> {
-        try {
-            return await this.shapeDataService.createZoneCoverageShapes(shapeDataCreateDto);
-        } catch (error: any) {
-            throw error;
-        }
+    @ApiResponse({ status: 500, description: 'Internal Server Error' })
+    async createZoneCoverageShapes(
+        @Body() shapeDataCreateDto: ShapeDataCircleCreateDto | ShapeDataPolygonCreateDto
+    ): Promise<ShapeDataResponseDto> {
+        return this.shapeDataService.createZoneCoverageShapes(shapeDataCreateDto);
     }
-
 
 
 }

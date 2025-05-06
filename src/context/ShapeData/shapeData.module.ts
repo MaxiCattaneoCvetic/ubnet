@@ -6,7 +6,7 @@ import {
     ShapeDataModel
 } from './models/schema/shapeData.schema';
 import { ShapeDataRepository } from './repository/shapeDatga.repository';
-import { ShapeDataController } from './controller/shapeData.ccontroller';
+import { ShapeDataController } from './controller/shapeData.controller';
 import { AuthModule } from '../Shared/auth/auth.module';
 
 @Module({

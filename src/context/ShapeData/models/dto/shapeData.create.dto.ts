@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { ShapeDataType } from "../enum/shapeData.type.enum";
 
-class ShapeDataCreateDto {
+export class ShapeDataCreateDto {
     @ApiProperty({
         description: 'Tipo de figura (CIRCLE o POLYGON)',
         enum: ShapeDataType,
@@ -19,15 +19,17 @@ class ShapeDataCreateDto {
 export class ShapeDataCircleCreateDto extends ShapeDataCreateDto {
     @ApiProperty({
         description: 'Centro del círculo (latitud y longitud)',
-        type: () => ({
+        type: 'object',
+        properties: {
             lat: { type: 'number', example: -34.603722 },
             lng: { type: 'number', example: -58.381592 },
-        }),
+        },
     })
     center: {
         lat: number;
         lng: number;
     };
+
 
     @ApiProperty({
         description: 'Radio del circulo',
@@ -39,12 +41,14 @@ export class ShapeDataCircleCreateDto extends ShapeDataCreateDto {
 export class ShapeDataPolygonCreateDto extends ShapeDataCreateDto {
     @ApiProperty({
         description: 'Lista de coordenadas que forman el poligono',
-        type: () => [
-            {
+        type: 'array',
+        items: {
+            type: 'object',
+            properties: {
                 lat: { type: 'number', example: -34.603722 },
                 lng: { type: 'number', example: -58.381592 },
             },
-        ],
+        },
     })
     path: {
         lat: number;
