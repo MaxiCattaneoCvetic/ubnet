@@ -29,10 +29,10 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
                 throw new BadRequestException("Plan type is required");
             }
 
-            if (subscriptionPlanDto.type === PlanType.INTERNET) {
+            if (subscriptionPlanDto.type === PlanType.FIBER || subscriptionPlanDto.type === PlanType.FIVEG) {
                 const internetPlan = this.makeInternetSubscription(subscriptionPlanDto);
                 const interetPlanCreated = await this.subscriptionPlanRepository.saveInternetPlan(internetPlan);
-                UbnetLoggerService.getInstance().log(PlanType.INTERNET + ' plan saved Successfully');
+                UbnetLoggerService.getInstance().log(subscriptionPlanDto.type + ' plan saved Successfully');
                 return interetPlanCreated;
 
             } else if (subscriptionPlanDto.type === PlanType.CAMERA) {

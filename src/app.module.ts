@@ -6,6 +6,7 @@ import { LoggerModule } from './context/Shared/logger/logger.module';
 import { DatabaseModule } from './context/Shared/database/database.module';
 import { AdvertiserBannerModule } from './context/AdvertisingBanner/advertiser.module';
 import { AuthModule } from './context/Shared/auth/auth.module';
+import { ZoneModule } from './context/zones/zone.module';
 
 
 @Module({
@@ -18,7 +19,8 @@ import { AuthModule } from './context/Shared/auth/auth.module';
     AuthModule,
     UserModule,
     DatabaseModule,
-    AdvertiserBannerModule
+    AdvertiserBannerModule,
+    ZoneModule
   ],
   providers: [],
 })

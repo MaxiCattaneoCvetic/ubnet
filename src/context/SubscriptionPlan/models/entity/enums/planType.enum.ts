@@ -1,5 +1,6 @@
 export enum PlanType {
-    INTERNET = 'INTERNET',
+    FIBER = 'FIBER',
+    FIVEG = '5G',
     CAMERA = 'CAMERA',
 }
 
