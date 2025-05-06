@@ -7,6 +7,7 @@ import { DatabaseModule } from './context/Shared/database/database.module';
 import { AdvertiserBannerModule } from './context/AdvertisingBanner/advertiser.module';
 import { AuthModule } from './context/Shared/auth/auth.module';
 import { ZoneModule } from './context/zones/zone.module';
+import { ShapeModule } from './context/ShapeData/shapeData.module';
 
 
 @Module({
@@ -20,7 +21,8 @@ import { ZoneModule } from './context/zones/zone.module';
     UserModule,
     DatabaseModule,
     AdvertiserBannerModule,
-    ZoneModule
+    ZoneModule,
+    ShapeModule
   ],
   providers: [],
 })

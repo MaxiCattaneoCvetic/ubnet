@@ -1,0 +1,24 @@
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+
+import { ShapeData } from "../models/entity/shapeData.entity";
+import { ShapeDataRepositoryInterface } from "./shapeData.respository.interface";
+import { ShapeDataDocument, ShapeDataModel } from "../models/schema/shapeData.schema";
+
+export class ShapeDataRepository implements ShapeDataRepositoryInterface {
+
+    constructor(
+        @InjectModel(ShapeDataModel.modelName)
+        private readonly shapeDataModel: Model<ShapeDataDocument>,
+    ) { }
+
+
+    async save(shapeData: ShapeData): Promise<any> {
+        try {
+            const shapeDataDocument = new this.shapeDataModel(shapeData);
+            return await shapeDataDocument.save();
+        } catch (error: any) {
+            throw error;
+        }
+    }
+}
