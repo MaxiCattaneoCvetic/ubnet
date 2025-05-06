@@ -37,7 +37,7 @@ export class ZoneController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    @ApiResponse({ status: 200, description: 'Zones found', type: ZoneResponseWithPlansDto })
+    @ApiResponse({ status: 200, description: 'Zones found', type: [ZoneResponseWithPlansDto] })
     @ApiResponse({ status: 404, description: 'Zones not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async getZonesWhithPlans(): Promise<any> {
