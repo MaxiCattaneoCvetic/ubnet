@@ -75,8 +75,13 @@ export class ShapeDataService implements ShapeDataServiceInterface {
 
 
 
-    getZonesCoverageShapes(): Promise<any> {
-        throw new Error("Method not implemented.");
+    async getAllCoverageShapes(): Promise<any> {
+        try {
+            return await this.shapeDataRepository.findAll();
+        } catch (error: any) {
+            throw error;
+        }
+
     }
 
 }

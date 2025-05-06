@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Post, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiResponse, getSchemaPath } from "@nestjs/swagger";
 
 import { ShapeDataServiceInterface } from "../service/shapeData.service.interface";
@@ -52,6 +52,24 @@ export class ShapeDataController {
     ): Promise<ShapeDataResponseDto> {
         return this.shapeDataService.createZoneCoverageShapes(shapeDataCreateDto);
     }
+
+
+
+    @Get()
+    @HttpCode(HttpStatus.OK)
+    @ApiResponse({
+        status: 201,
+        description: 'All Zone Coverage ',
+        type: [ShapeDataResponseDto]
+    })
+    @ApiResponse({ status: 400, description: 'Bad Request' })
+    @ApiResponse({ status: 404, description: 'Not Found' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error' })
+    async getAllCoverageShapes(
+    ): Promise<ShapeDataResponseDto> {
+        return this.shapeDataService.getAllCoverageShapes();
+    }
+
 
 
 }

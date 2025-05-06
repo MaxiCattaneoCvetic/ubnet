@@ -13,6 +13,7 @@ export class ShapeDataRepository implements ShapeDataRepositoryInterface {
     ) { }
 
 
+
     async save(shapeData: ShapeData): Promise<any> {
         try {
             const shapeDataDocument = new this.shapeDataModel(shapeData);
@@ -21,4 +22,9 @@ export class ShapeDataRepository implements ShapeDataRepositoryInterface {
             throw error;
         }
     }
+
+    async findAll(): Promise<any> {
+        return await this.shapeDataModel.find().lean() ?? [];
+    }
+
 }
