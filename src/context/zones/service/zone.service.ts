@@ -39,8 +39,15 @@ export class ZoneService implements ZoneServiceInterface {
     }
 
 
-    async getZonesByName(): Promise<any> {
-        throw new Error("Method not implemented.");
+    async getZonesByName(name: string): Promise<any> {
+        try {
+            if (!name) return null;
+            UbnetLoggerService.getInstance().log("Finding all zones by name" + name);
+            return await this.zoneRepository.getZonesByName(name);
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error("Error finding all zones by name" + name, error);
+            throw error;
+        }
     }
 
 

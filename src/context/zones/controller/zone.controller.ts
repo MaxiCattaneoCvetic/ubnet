@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpStatus, Inject, Post, UseGuards } from "@nestjs/common";
+import { Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiResponse } from "@nestjs/swagger";
 
 
@@ -54,9 +54,9 @@ export class ZoneController {
     @ApiResponse({ status: 200, description: 'Zones found', type: ZoneResponseWithPlansDto })
     @ApiResponse({ status: 404, description: 'Zones not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
-    async getZonesByName(name: string): Promise<any> {
+    async getZonesByName(@Param('name') name: string): Promise<any> {
         try {
-            return this.zoneService.getZonesWhithPlans();
+            return this.zoneService.getZonesByName(name);
         } catch (error: any) {
             throw error;
         }

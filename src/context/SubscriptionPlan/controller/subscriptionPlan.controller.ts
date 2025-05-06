@@ -25,7 +25,7 @@ export class SubscriptionPlanController {
     @ApiResponse({ status: 201, description: 'Plan created', type: SubscriptionPlanCreateDto })
     @ApiResponse({ status: 400, description: 'Plan has not been created, check your payload' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
-    async createSubscriptionPlan(subscriptionPlanDto: SubscriptionPlanCreateDto): Promise<any> {
+    async createSubscriptionPlan(@Body() subscriptionPlanDto: SubscriptionPlanCreateDto): Promise<any> {
         try {
             return this.subscriptionPlanService.createSubscriptionPlan(subscriptionPlanDto);
         } catch (error: any) {
@@ -54,7 +54,7 @@ export class SubscriptionPlanController {
     @ApiResponse({ status: 200, description: 'Subscription Plan found', type: SubscriptionPlanResponseDto })
     @ApiResponse({ status: 404, description: 'Subscription Plan not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
-    async findSubscriptionPlanById(id: string): Promise<any> {
+    async findSubscriptionPlanById(@Param('id') id: string): Promise<any> {
         try {
             return this.subscriptionPlanService.findById(id);
         } catch (error: any) {

@@ -14,6 +14,7 @@ export class ZoneRepository implements ZoneRepositoryInterface {
 
     ) { }
 
+
     async save(zoneCreateDto: Zone): Promise<any> {
         try {
             const zoneDocument = new this.zoneDocument(zoneCreateDto);
@@ -30,6 +31,19 @@ export class ZoneRepository implements ZoneRepositoryInterface {
         try {
             return await this.zoneDocument
                 .find()
+                .populate({
+                    path: 'plans',
+                    match: { isActive: true }
+                })
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
+    async getZonesByName(name: string): Promise<any> {
+        try {
+            return await this.zoneDocument
+                .find({ name })
                 .populate({
                     path: 'plans',
                     match: { isActive: true }
