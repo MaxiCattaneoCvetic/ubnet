@@ -31,7 +31,7 @@ export class UserRepository implements UserRepositoryInterface {
     async checkDisponibility(): Promise<boolean> {
         try {
             const user = await this.userModel.find();
-            if (user.length > 3) return false;
+            if (user.length > 50) return false;
             return true;
         } catch (error: any) {
             throw error;
