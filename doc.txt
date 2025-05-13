@@ -1,60 +1,7 @@
-mira te tiro unas request que voy a necesitar:
-- getZonesAndPlans: deberia traerme las zonas con sus respectivos planes
-- ⁠getZonesCoverageShapes: deberia traerme las figuras geometricas que marcan las zonas en el mapa
-- ⁠getAnnouncements: traer las imagenes que se muestran al principio
+Hacer propiedad de orden para los banners 
+Hacer una ruta para eliminar los banners
 
+// shape data 
 
-// Fiber, 5g, etc
-export interface PlanType {
-  _id: string;
-  label: string;
-}
-
-export interface SubscriptionPlan {
-  _id: string;
-  title: string;
-  detail: string[];
-  isPromotionPlan: boolean;
-  isFeature: boolean;
-  isActive: boolean;
-  uploadDownloadValues: {
-    upload: string;
-    download: string;
-  };
-  sideText?: string;
-  type?: string;
-  planType?: PlanType;
-}
-
-export interface Zone {
-  _id: string;
-  label: string;
-  plans: SubscriptionPlan[];
-}
-
-
-// MongoDB data models
-export interface CircleData {
-  center: {
-    lat: number;
-    lng: number;
-  };
-  radius: number;
-}
-
-export interface PolygonData {
-  path: {
-    lat: number;
-    lng: number;
-  }[];
-}
-
-export interface ShapeData {
-  _id?: string;
-  type: "CIRCLE" | "POLYGON";
-  clientId: string;
-  circle?: CircleData;
-  polygon?: PolygonData;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+Si viene con ID editarla, sino crearla (RUTA POST)
+Hacer una para eliminar el schema.

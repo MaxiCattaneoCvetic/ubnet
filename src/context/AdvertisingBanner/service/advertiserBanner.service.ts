@@ -27,7 +27,7 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
             UbnetLoggerService.getInstance().log('Advertiser banner updated Successfully');
             return advertiserBannerUpdted;
 
-       
+
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error updating advertiser banner', error);
             throw error;
@@ -37,10 +37,15 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
     async create(advertiserBannerCreateDto: AdvertiserBannerCreateDto): Promise<any> {
         try {
             UbnetLoggerService.getInstance().log('Saving advertiser banner in service...');
+            let order: number | undefined = undefined;
+
+            if (!advertiserBannerCreateDto.order || advertiserBannerCreateDto.order < 0) order = 0;
+
             const advertiserBanner = new AdvertiserBanner(
                 advertiserBannerCreateDto.description,
                 advertiserBannerCreateDto.imageUrl,
-                true
+                true,
+                advertiserBannerCreateDto.order ?? order
             )
             return await this.advertiserBannerRepository.save(advertiserBanner);
         } catch (error: any) {

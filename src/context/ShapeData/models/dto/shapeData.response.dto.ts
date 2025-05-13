@@ -45,6 +45,14 @@ class ShapeDataCircleDto {
 export class ShapeDataResponseDto {
 
     @ApiProperty({
+        description: 'Id del shema',
+        example: "a6515a6s151as",
+        type: String
+    })
+    _id: string;
+
+
+    @ApiProperty({
         description: 'Tipo de figura (CIRCLE o POLYGON)',
         enum: ShapeDataType,
         example: ShapeDataType.CIRCLE,

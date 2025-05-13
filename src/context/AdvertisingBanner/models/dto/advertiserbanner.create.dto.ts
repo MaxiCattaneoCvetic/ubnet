@@ -14,6 +14,14 @@ export class AdvertiserBannerCreateDto {
         type: String
     })
     readonly imageUrl: string;
+
+    @ApiProperty({
+        description: 'Order of the banner, if you dont send it will be 0',
+        example: 1,
+        type: Number
+    })
+    readonly order: number;
+
 }
 
 export class AdvertiserBannerUpdateDto {
@@ -43,6 +51,15 @@ export class AdvertiserBannerUpdateDto {
         type: Boolean
     })
     readonly isActive: Boolean;
+
+
+    @ApiProperty({
+        description: 'Order of the banner',
+        example: 1,
+        type: Number
+    })
+    readonly order: number;
+
 
 }
 

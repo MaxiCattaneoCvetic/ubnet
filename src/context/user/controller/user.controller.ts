@@ -1,8 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Inject, Post } from "@nestjs/common";
+import { ApiBody, ApiResponse } from "@nestjs/swagger";
 
 import { UserRegisterDto, UserRegisterDto_response } from "../models/dto/user.register.dto";
 import { UserServiceInterface } from "../service/user.service.interface";
-import { ApiBody, ApiResponse } from "@nestjs/swagger";
 
 @Controller('register')
 export class UserController {
