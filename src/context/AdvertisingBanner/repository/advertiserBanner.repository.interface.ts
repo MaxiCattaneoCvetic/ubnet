@@ -6,4 +6,5 @@ export interface AdvertiserBannerRepositoryInterface {
     findById(id: string): Promise<AdvertiserBanner | null>
     findAll(): Promise<AdvertiserBanner[]>
     updateBannners(advertiserBanner: AdvertiserBannerUpdateDto[]): Promise<any>
+    deleteBannerById(id: string): Promise<any>
 }

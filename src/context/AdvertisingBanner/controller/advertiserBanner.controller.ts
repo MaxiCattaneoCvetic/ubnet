@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, UseGuards, NotFoundException, Put } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, UseGuards, NotFoundException, Put, Delete } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse } from "@nestjs/swagger";
 
 import { AdvertiserBannerCreateDto, AdvertiserBannerCreateDto_response, AdvertiserBannerUpdateDto } from "../models/dto/advertiserbanner.create.dto";
@@ -78,6 +78,22 @@ export class AdvertiserBannerController {
         try {
             const advertiserBanner = await this.advertiserBannerService.updateBannners(advertiserBannerUpdateDto);
             return advertiserBanner;
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
+
+    @HttpCode(HttpStatus.OK)
+    @Delete()
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth('JWT-auth')
+    @ApiResponse({ status: 200, description: 'Banner eliminado correctaente' })
+    @ApiResponse({ status: 404, description: 'Banner no encontrado' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    async deleteBannerById(@Param('id') id: string) {
+        try {
+            await this.advertiserBannerService.deleteBannerById(id);
         } catch (error: any) {
             throw error;
         }

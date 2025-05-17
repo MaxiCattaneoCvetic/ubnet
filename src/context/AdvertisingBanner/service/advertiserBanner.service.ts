@@ -5,7 +5,7 @@ import { AdvertiserBannerServiceInterface } from "./advertiserBanner.service.int
 import { AdvertiserBannerRepositoryInterface } from "../repository/advertiserBanner.repository.interface";
 import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 import { AdvertiserBanner } from "../models/entity/advertiserBanner.entity";
-import { createObjectWithoutUndefined } from "../function/object.factory.create";
+
 
 export class AdvertiserBannerService implements AdvertiserBannerServiceInterface {
 
@@ -13,6 +13,17 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
         @Inject('AdvertiserBannerRepositoryInterface')
         private readonly advertiserBannerRepository: AdvertiserBannerRepositoryInterface
     ) { }
+    async deleteBannerById(id: string): Promise<any> {
+        try {
+            UbnetLoggerService.getInstance().log('Deleting advertiser banner in service... id: ' + id);
+            const advertiserBannerDeleted = await this.advertiserBannerRepository.deleteBannerById(id);
+            if (!advertiserBannerDeleted) return null;
+            UbnetLoggerService.getInstance().log('Advertiser banner deleted Successfully');
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error deleting advertiser banner', error);
+            throw error;
+        }
+    }
 
 
     async updateBannners(advertiserBannerUpdate: AdvertiserBannerUpdateDto[]): Promise<any> {

@@ -13,6 +13,14 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
         @InjectModel(AdvertiserBannerModel.modelName)
         private readonly advertiserBannerModel: Model<AdvertiserBannerDocument>
     ) { }
+    async deleteBannerById(id: string): Promise<any> {
+        try {
+            return await this.advertiserBannerModel.deleteOne({ _id: id });
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error deleting advertiser banner', error);
+            throw error;
+        }
+    }
 
 
     async findById(id: string): Promise<AdvertiserBanner | null> {
