@@ -46,10 +46,9 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
         }
     }
 
-    async updateBannerById(_id: string, advertiserBanner: AdvertiserBannerUpdateDto): Promise<any> {
+    async updateBannners(advertiserBanner: AdvertiserBannerUpdateDto[]): Promise<any> {
         try {
-
-            return await this.advertiserBannerModel.findByIdAndUpdate(_id, advertiserBanner, { new: true });
+            return await this.advertiserBannerModel.updateMany({}, advertiserBanner);
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error updating advertiser banner', error);
             throw error;

@@ -15,14 +15,10 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
     ) { }
 
 
-    async updateBannerById(advertiserBannerUpdate: AdvertiserBannerUpdateDto): Promise<any> {
+    async updateBannners(advertiserBannerUpdate: AdvertiserBannerUpdateDto[]): Promise<any> {
         try {
-            const _id = advertiserBannerUpdate._id;
-            if (!_id) throw new BadRequestException('Id is required');
-            UbnetLoggerService.getInstance().log('Updating advertiser banner in service... id: ' + _id);
-
-            const advertiserBannerDataToUpdate: any = createObjectWithoutUndefined(advertiserBannerUpdate);
-            const advertiserBannerUpdted = await this.advertiserBannerRepository.updateBannerById(_id, advertiserBannerDataToUpdate);
+            UbnetLoggerService.getInstance().log('Updating advertiser banners');
+            const advertiserBannerUpdted = await this.advertiserBannerRepository.updateBannners(advertiserBannerUpdate);
             if (!advertiserBannerUpdted) return null;
             UbnetLoggerService.getInstance().log('Advertiser banner updated Successfully');
             return advertiserBannerUpdted;
@@ -33,6 +29,8 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
             throw error;
         }
     }
+
+
 
     async create(advertiserBannerCreateDto: AdvertiserBannerCreateDto): Promise<any> {
         try {

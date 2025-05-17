@@ -5,5 +5,5 @@ export interface AdvertiserBannerServiceInterface {
     create(advertiserBannerCreateDto: AdvertiserBannerCreateDto): Promise<any>
     findById(id: string): Promise<AdvertiserBanner | null>
     findAll(): Promise<AdvertiserBanner[]>
-    updateBannerById(advertiserBannerCreateDto: AdvertiserBannerUpdateDto): Promise<any>
+    updateBannners(advertiserBannerCreateDto: AdvertiserBannerUpdateDto[]): Promise<any>
 }

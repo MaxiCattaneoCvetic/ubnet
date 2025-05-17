@@ -71,15 +71,12 @@ export class AdvertiserBannerController {
     @UseGuards(AuthGuard)
     @ApiBearerAuth('JWT-auth')
     @ApiBody({ type: AdvertiserBannerUpdateDto, description: 'Nuevo Banner' })
-    @ApiResponse({ status: 200, description: 'Banner editado correctaente', type: AdvertiserBannerCreateDto_response })
+    @ApiResponse({ status: 200, description: 'Banner editado correctaente', type: [AdvertiserBannerCreateDto_response] })
     @ApiResponse({ status: 404, description: 'Banner no encontrado' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
-    async updateBannerById(@Body() advertiserBannerUpdateDto: AdvertiserBannerUpdateDto) {
+    async updateBannners(@Body() advertiserBannerUpdateDto: [AdvertiserBannerUpdateDto]) {
         try {
-            const advertiserBanner = await this.advertiserBannerService.updateBannerById(advertiserBannerUpdateDto);
-            if (!advertiserBanner) {
-                throw new NotFoundException(`Banner with ID ${advertiserBannerUpdateDto._id} not found`);
-            }
+            const advertiserBanner = await this.advertiserBannerService.updateBannners(advertiserBannerUpdateDto);
             return advertiserBanner;
         } catch (error: any) {
             throw error;
