@@ -93,7 +93,8 @@ export class AdvertiserBannerController {
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async deleteBannerById(@Param('id') id: string) {
         try {
-            await this.advertiserBannerService.deleteBannerById(id);
+            const response = await this.advertiserBannerService.deleteBannerById(id);
+            if (!response) throw new NotFoundException(`Banner with ID ${id} not found`);
         } catch (error: any) {
             throw error;
         }
