@@ -48,7 +48,7 @@ export class ShapeDataController {
     @ApiResponse({ status: 400, description: 'Bad Request' })
     @ApiResponse({ status: 500, description: 'Internal Server Error' })
     async createZoneCoverageShapes(
-        @Body() shapeDataCreateDto: ShapeDataCircleCreateDto | ShapeDataPolygonCreateDto
+        @Body() shapeDataCreateDto: (ShapeDataCircleCreateDto | ShapeDataPolygonCreateDto)[]
     ): Promise<ShapeDataResponseDto> {
         return this.shapeDataService.createZoneCoverageShapes(shapeDataCreateDto);
     }

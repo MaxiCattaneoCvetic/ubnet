@@ -38,6 +38,37 @@ export class ShapeDataCircleCreateDto extends ShapeDataCreateDto {
     radius: number;
 }
 
+export class ShapeDataCircleUpdateDto extends ShapeDataCreateDto {
+    @ApiProperty({
+        description: 'Centro del círculo (latitud y longitud)',
+        type: 'object',
+        properties: {
+            lat: { type: 'number', example: -34.603722 },
+            lng: { type: 'number', example: -58.381592 },
+        },
+    })
+    center: {
+        lat: number;
+        lng: number;
+    };
+
+
+    @ApiProperty({
+        description: 'Radio del circulo',
+        example: 1000,
+    })
+    radius: number;
+
+
+    @ApiProperty({
+        description: 'id of schema',
+        example: "asd1a5s6d",
+    })
+    _id: string;
+
+}
+
+
 export class ShapeDataPolygonCreateDto extends ShapeDataCreateDto {
     @ApiProperty({
         description: 'Lista de coordenadas que forman el poligono',
@@ -54,4 +85,32 @@ export class ShapeDataPolygonCreateDto extends ShapeDataCreateDto {
         lat: number;
         lng: number;
     }[];
+}
+
+
+
+export class ShapeDataPolygonUpdateDto extends ShapeDataCreateDto {
+    @ApiProperty({
+        description: 'Lista de coordenadas que forman el poligono',
+        type: 'array',
+        items: {
+            type: 'object',
+            properties: {
+                lat: { type: 'number', example: -34.603722 },
+                lng: { type: 'number', example: -58.381592 },
+            },
+        },
+    })
+    path: {
+        lat: number;
+        lng: number;
+    }[];
+
+
+    @ApiProperty({
+        description: 'id of schema',
+        example: "asd1a5s6d",
+    })
+    _id: string;
+
 }
