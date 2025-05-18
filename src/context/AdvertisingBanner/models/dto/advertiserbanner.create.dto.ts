@@ -16,6 +16,15 @@ export class AdvertiserBannerCreateDto {
     readonly imageUrl: string;
 
     @ApiProperty({
+        description: 'Image url of advertiser banner',
+        example: "https://image.com/mobile-123",
+        type: String
+    })
+    readonly mobileImageUrl: string;
+
+
+
+    @ApiProperty({
         description: 'Order of the banner, if you dont send it will be 0',
         example: 1,
         type: Number
@@ -52,6 +61,14 @@ export class AdvertiserBannerUpdateDto {
     })
     readonly isActive: Boolean;
 
+    @ApiProperty({
+        description: 'Image url of advertiser banner',
+        example: "https://image.com/mobile-123",
+        type: String
+    })
+    readonly mobileImageUrl: string;
+
+
 
     @ApiProperty({
         description: 'Order of the banner',
@@ -72,6 +89,7 @@ export class AdvertiserBannerCreateDto_response extends AdvertiserBannerCreateDt
         example: true,
     })
     readonly isActive: Boolean;
+
 
     @ApiProperty({
         description: 'Id',

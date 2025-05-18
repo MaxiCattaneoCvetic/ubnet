@@ -53,6 +53,7 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
             const advertiserBanner = new AdvertiserBanner(
                 advertiserBannerCreateDto.description,
                 advertiserBannerCreateDto.imageUrl,
+                advertiserBannerCreateDto.mobileImageUrl,
                 true,
                 advertiserBannerCreateDto.order ?? order
             )
