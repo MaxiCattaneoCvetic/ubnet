@@ -8,7 +8,7 @@ export class AdvertiserBanner {
     constructor(description: string, imageUrl: string, mobileImageUrl: string, isActive: Boolean, order: number) {
         this.description = description;
         this.imageUrl = imageUrl;
-        this.mobileImageUrl = mobileImageUrl;
+        this.mobileImageUrl = mobileImageUrl ?? "";
         this.isActive = isActive;
         this.order = order
     }

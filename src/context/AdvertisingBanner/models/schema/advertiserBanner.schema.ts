@@ -13,7 +13,7 @@ const AdvertiserBannerSchema = new Schema<AdvertiserBannerDocument>(
     {
         description: { type: String, required: true },
         imageUrl: { type: String, required: true },
-        mobileImageUrl: { type: String, required: true },
+        mobileImageUrl: { type: String },
         isActive: { type: Boolean, required: true },
         order: { type: Number, required: true }
     }
