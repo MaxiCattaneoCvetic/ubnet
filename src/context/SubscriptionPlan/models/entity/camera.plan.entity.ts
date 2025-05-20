@@ -9,7 +9,9 @@ export class CameraPlanEntity extends SubscriptionPlan {
             subscriptionPlan.getRegion,
             subscriptionPlan.getType,
             subscriptionPlan.getIsPromotionPlan,
-            subscriptionPlan.getSideText);
+            subscriptionPlan.getSideText,
+            subscriptionPlan.getfeaturedMessage
+        );
 
     }
 }

@@ -78,7 +78,8 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
             subscriptionPlanDto.region,
             subscriptionPlanDto.type,
             subscriptionPlanDto.isPromotionPlan,
-            subscriptionPlanDto.sideText
+            subscriptionPlanDto.sideText,
+            subscriptionPlanDto.featuredMessage
         );
     }
 

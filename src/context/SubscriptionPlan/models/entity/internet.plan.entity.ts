@@ -16,7 +16,10 @@ export class InternetPlanEntity extends SubscriptionPlan {
             subscriptionPlan.getRegion,
             subscriptionPlan.getType,
             subscriptionPlan.getIsPromotionPlan,
-            subscriptionPlan.getSideText);
+            subscriptionPlan.getSideText,
+            subscriptionPlan.getfeaturedMessage
+
+        );
         this.isFeature = isFeature;
         this.uploadDownloadValues = uploadDownloadValues;
     }

@@ -7,6 +7,7 @@ export class SubscriptionPlan {
     private type: string;
     private isPromotionPlan: boolean;
     private sideText?: string;
+    private featuredMessage?: string
 
 
     constructor(
@@ -17,7 +18,9 @@ export class SubscriptionPlan {
         region: string,
         type: string,
         isPromotionPlan: boolean,
-        sideText?: string) {
+        sideText?: string,
+        featuredMessage?: string
+    ) {
         this.title = title;
         this.detail = detail;
         this.price = price;
@@ -26,6 +29,8 @@ export class SubscriptionPlan {
         this.type = type;
         this.isPromotionPlan = isPromotionPlan;
         this.sideText = sideText;
+        this.featuredMessage = featuredMessage
+
     }
 
     get getTitle() { return this.title; }
@@ -36,6 +41,7 @@ export class SubscriptionPlan {
     get getType() { return this.type; }
     get getSideText() { return this.sideText; }
     get getIsPromotionPlan() { return this.isPromotionPlan; }
+    get getfeaturedMessage() { return this.featuredMessage; }
 
 
 }

@@ -30,6 +30,9 @@ export class SubscriptionPlanDocument extends Document {
 
     @Prop({ type: String, required: false })
     sideText?: string;
+
+    @Prop({ type: String, required: false })
+    featuredMessage?: string
 }
 
 export const SubscriptionPlanSchema = SchemaFactory.createForClass(SubscriptionPlanDocument);
