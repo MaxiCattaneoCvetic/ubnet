@@ -85,7 +85,7 @@ export class AdvertiserBannerController {
 
 
     @HttpCode(HttpStatus.OK)
-    @Delete()
+    @Delete(':id')
     @UseGuards(AuthGuard)
     @ApiBearerAuth('JWT-auth')
     @ApiResponse({ status: 200, description: 'Banner eliminado correctaente' })

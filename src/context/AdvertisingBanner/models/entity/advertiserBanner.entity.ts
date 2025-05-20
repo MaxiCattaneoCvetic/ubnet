@@ -11,6 +11,9 @@ export class AdvertiserBanner {
         this.mobileImageUrl = mobileImageUrl ?? "";
         this.isActive = isActive;
         this.order = order
+
     }
+
+
 
 }
