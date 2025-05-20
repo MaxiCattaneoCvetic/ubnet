@@ -70,7 +70,7 @@ export class AdvertiserBannerController {
     @Put()
     @UseGuards(AuthGuard)
     @ApiBearerAuth('JWT-auth')
-    @ApiBody({ type: AdvertiserBannerUpdateDto, description: 'Nuevo Banner' })
+    @ApiBody({ type: [AdvertiserBannerUpdateDto], description: 'Nuevo Banner' })
     @ApiResponse({ status: 200, description: 'Banner editado correctaente', type: [AdvertiserBannerCreateDto_response] })
     @ApiResponse({ status: 404, description: 'Banner no encontrado' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
