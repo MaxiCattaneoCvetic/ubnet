@@ -18,10 +18,10 @@ import { UserModule } from 'src/context/User/user.module';
         }),
         MongooseModule.forFeature([
             {
-              name: UserModel.modelName,
-              schema: UserModel.schema,
+                name: UserModel.modelName,
+                schema: UserModel.schema,
             },
-          ]),
+        ]),
         UserModule,
         JwtModule.registerAsync({
             imports: [ConfigModule],
@@ -30,7 +30,7 @@ import { UserModule } from 'src/context/User/user.module';
                 global: true,
                 secret: configService.get<string>('JWT_SECRET'),
                 signOptions: {
-                    expiresIn: '60s',
+                    expiresIn: '15d',
                 },
             }),
         }),
