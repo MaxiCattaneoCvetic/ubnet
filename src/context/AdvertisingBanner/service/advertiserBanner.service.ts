@@ -17,12 +17,9 @@ export class AdvertiserBannerService implements AdvertiserBannerServiceInterface
         try {
             UbnetLoggerService.getInstance().log('Deleting advertiser banner in service... id: ' + id);
             const advertiserBannerDeleted = await this.advertiserBannerRepository.deleteBannerById(id);
-            if (!advertiserBannerDeleted) {
-                return []
-            } else {
-                UbnetLoggerService.getInstance().log('Advertiser banner deleted Successfully');
-                return advertiserBannerDeleted
-            }
+            if (!advertiserBannerDeleted) return []
+            UbnetLoggerService.getInstance().log('Advertiser banner deleted Successfully');
+            return advertiserBannerDeleted
 
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error deleting advertiser banner', error);

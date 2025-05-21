@@ -31,7 +31,7 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
         }
     }
 
-    async findAll(): Promise<AdvertiserBanner[]> {
+    async findAll(): Promise<any[]> {
         try {
             return await this.advertiserBannerModel.find();
         } catch (error: any) {

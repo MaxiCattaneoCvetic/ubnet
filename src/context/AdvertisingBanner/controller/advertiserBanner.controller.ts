@@ -37,6 +37,7 @@ export class AdvertiserBannerController {
     async findAll() {
         try {
             const advertiserBanners = await this.advertiserBannerService.findAll();
+
             if (!advertiserBanners || advertiserBanners.length === 0) {
                 throw new NotFoundException('No banners found');
             }
