@@ -58,10 +58,10 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
         try {
             if (advertiserBanner.length > 0) {
                 await this.advertiserBannerModel.deleteMany({});
-                await this.advertiserBannerModel.insertMany(advertiserBanner);
+                return await this.advertiserBannerModel.insertMany(advertiserBanner);
             }
 
-            return { success: true };
+            return []
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error updating advertiser banners', error);
             throw error;
