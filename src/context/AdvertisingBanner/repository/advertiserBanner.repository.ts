@@ -56,11 +56,17 @@ export class AdvertiserBannerRepository implements AdvertiserBannerRepositoryInt
 
     async updateBannners(advertiserBanner: AdvertiserBannerUpdateDto[]): Promise<any> {
         try {
-            return await this.advertiserBannerModel.updateMany({}, advertiserBanner);
+            if (advertiserBanner.length > 0) {
+                await this.advertiserBannerModel.deleteMany({});
+                await this.advertiserBannerModel.insertMany(advertiserBanner);
+            }
+
+            return { success: true };
         } catch (error: any) {
-            UbnetLoggerService.getInstance().error('Error updating advertiser banner', error);
+            UbnetLoggerService.getInstance().error('Error updating advertiser banners', error);
             throw error;
         }
     }
+
 
 }
