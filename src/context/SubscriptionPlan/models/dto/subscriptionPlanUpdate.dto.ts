@@ -1,72 +1,62 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class SubscriptionPlanUpdateDto {
-
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Updated title/name of the subscription plan',
+        example: "Business Fiber Plus",
         type: String
     })
     title?: string;
 
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Updated description of plan features and benefits',
+        example: "200MB symmetric fiber + 100 TV channels",
         type: String
     })
     detail?: string;
 
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Updated monthly price of the plan',
+        example: 89.99,
         type: Number
     })
     price?: number;
 
-
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Sets whether the plan is available for subscription',
+        example: true,
         type: Boolean
     })
     isActive?: boolean;
 
-
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Optional promotional text or badge for the plan',
+        example: "Most Popular",
         type: String,
         required: false
     })
     sideText?: string;
 
     @ApiProperty({
-        description: 'Indicate if the plan is a promotion plan',
-        example: "Premium",
+        description: 'Flag to indicate if this is a limited-time promotional plan',
+        example: false,
         type: Boolean,
-        required: true,
-
+        required: true
     })
     isPromotionPlan?: boolean;
 
-
     @ApiProperty({
-        description: 'Indicate status of the plan - Is required only for internet plan',
-        example: "Premium",
-        required: true,
-
+        description: 'Updated speed values (required for internet plans)',
+        example: { upload: "200Mbps", download: "200Mbps" },
+        required: true
     })
     uploadDownloadValues?: { upload: string, download: string };
 
-
     @ApiProperty({
-        description: 'indicate if the plan is a feature plan- Is required only for internet plan',
-        example: "Premium",
+        description: 'Whether to highlight this plan as featured (required for internet plans)',
+        example: true,
         type: Boolean,
-        required: true,
-
+        required: true
     })
     isFeature?: boolean;
-
-
 }

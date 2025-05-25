@@ -1,90 +1,79 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class SubscriptionPlanCreateDto {
-
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Title or name of the subscription plan',
+        example: "Basic Plan",
         type: String
     })
     title: string;
 
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Detailed description of what the plan includes',
+        example: "Includes 50MB internet speed and basic TV channels",
         type: String
     })
     detail: string;
 
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Whether the plan is currently active and available for subscription',
+        example: true,
         type: Boolean
     })
     isActive: boolean;
 
     @ApiProperty({
-        description: 'Plan type',
+        description: 'Category or classification of the plan',
         example: "fiber",
         type: String
     })
     planType: string;
 
-
-
     @ApiProperty({
-        description: 'Indicate if the plan is a promotion plan',
-        example: "Premium",
+        description: 'Flag indicating if this plan is a special promotional offer',
+        example: false,
         type: Boolean,
-        required: true,
-
+        required: true
     })
     isPromotionPlan: boolean;
 
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Optional additional text or tagline for the plan',
+        example: "Best value",
         type: String,
         required: false
     })
     sideText?: string;
 
-
     @ApiProperty({
-        description: 'indicate if the plan is a feature plan- Is required only for internet plan',
-        example: "Premium",
+        description: 'Whether this plan should be highlighted as featured (only relevant for internet plans)',
+        example: false,
         type: Boolean,
-        required: false,
-
+        required: false
     })
     isFeature?: boolean;
 
     @ApiProperty({
-        description: 'Price of subscription plan',
-        example: "Premium",
+        description: 'Monthly cost of the subscription plan',
+        example: 29.99,
         type: Number,
-        required: false,
-
+        required: false
     })
     price?: number;
 
     @ApiProperty({
-        description: 'Indicate status of the plan - Is required only for internet plan',
-        example: "Premium",
-        required: false,
+        description: 'Upload and download speed specifications (required only for internet plans)',
+        example: { upload: "50Mbps", download: "50Mbps" },
+        required: false
     })
     uploadDownloadValues?: { upload: string, download: string };
-
-
 }
-
 
 export class SubscriptionPlanResponseDto extends SubscriptionPlanCreateDto {
     @ApiProperty({
-        description: 'Id of subscription plan',
-        example: "1234",
+        description: 'Unique identifier for the subscription plan',
+        example: "5f8d04b3ab35de3a3427d9e0",
         type: String
     })
-    readonly _id: string
-
+    readonly _id: string;
 }

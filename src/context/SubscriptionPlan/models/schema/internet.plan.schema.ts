@@ -5,9 +5,14 @@ import { SubscriptionPlanDocument } from './subscriptionPlan.schema';
 
 
 
+class uploadDownloadValues {
+    upload: string
+    download: string
+}
+
 @Schema()
 export class InternetPlanDocument extends SubscriptionPlanDocument {
-    @Prop({ required: true })
+    @Prop({ type: uploadDownloadValues, required: true })
     uploadDownloadValues: {
         upload: string,
         download: string

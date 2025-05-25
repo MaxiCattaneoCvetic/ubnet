@@ -8,6 +8,7 @@ import { AdvertiserBannerModule } from './context/AdvertisingBanner/advertiser.m
 import { AuthModule } from './context/Shared/auth/auth.module';
 import { ZoneModule } from './context/zones/zone.module';
 import { ShapeModule } from './context/ShapeData/shapeData.module';
+import { SubscriptionPlanModule } from './context/SubscriptionPlan/subscription.module';
 
 
 @Module({
@@ -22,7 +23,8 @@ import { ShapeModule } from './context/ShapeData/shapeData.module';
     DatabaseModule,
     AdvertiserBannerModule,
     ZoneModule,
-    ShapeModule
+    ShapeModule,
+    SubscriptionPlanModule
   ],
   providers: [],
 })
