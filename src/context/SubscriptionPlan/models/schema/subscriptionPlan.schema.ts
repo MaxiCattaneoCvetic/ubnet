@@ -13,26 +13,20 @@ export class SubscriptionPlanDocument extends Document {
     @Prop({ type: String, required: true })
     detail: string;
 
-    @Prop({ type: String, required: true })
-    price: string;
-
     @Prop({ type: Boolean, required: true })
     isActive: boolean;
 
-    @Prop({ type: String, required: true })
-    region: string;
+    @Prop({ type: String, enum: [PlanType.SECURITY, PlanType.FIBER, PlanType.FIVEG], required: true })
+    planType: PlanType;
 
-    @Prop({ type: String, enum: [PlanType.CAMERA, PlanType.FIBER, PlanType.FIVEG], required: true })
-    type: string;
-
-    @Prop({ type: Boolean, required: true })
+    @Prop({ type: Boolean, required: true, default: false })
     isPromotionPlan: boolean;
 
     @Prop({ type: String, required: false })
     sideText?: string;
 
     @Prop({ type: String, required: false })
-    featuredMessage?: string
+    isFeature?: string
 }
 
 export const SubscriptionPlanSchema = SchemaFactory.createForClass(SubscriptionPlanDocument);

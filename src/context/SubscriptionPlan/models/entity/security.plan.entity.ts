@@ -1,17 +1,19 @@
 import { SubscriptionPlan } from "./subscriptionPlan.entity";
 
-export class CameraPlanEntity extends SubscriptionPlan {
-    constructor(subscriptionPlan: SubscriptionPlan) {
+export class SecurityPlanEntity extends SubscriptionPlan {
+
+    private price: number
+
+    constructor(subscriptionPlan: SubscriptionPlan, price: number) {
         super(subscriptionPlan.getTitle,
             subscriptionPlan.getDetail,
-            subscriptionPlan.getPrice,
             subscriptionPlan.getIsActive,
-            subscriptionPlan.getRegion,
-            subscriptionPlan.getType,
+            subscriptionPlan.getPlanType,
             subscriptionPlan.getIsPromotionPlan,
             subscriptionPlan.getSideText,
-            subscriptionPlan.getfeaturedMessage
+            subscriptionPlan.getIsFeature
         );
+        this.price = price;
 
     }
 }

@@ -5,7 +5,7 @@ import { ApiBearerAuth, ApiBody, ApiResponse } from "@nestjs/swagger";
 import { SubscriptionPlanCreateDto, SubscriptionPlanResponseDto } from "../models/dto/subscriptionPlans.dto";
 import { SubscriptionPlanUpdateDto } from "../models/dto/subscriptionPlanUpdate.dto";
 
-@Controller('plans')
+@Controller('plan')
 export class SubscriptionPlanController {
 
     constructor(

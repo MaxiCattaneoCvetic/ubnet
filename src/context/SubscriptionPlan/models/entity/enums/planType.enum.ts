@@ -1,7 +1,7 @@
 export enum PlanType {
-    FIBER = 'FIBER',
-    FIVEG = '5G',
-    CAMERA = 'CAMERA',
-        
+    FIBER = 'fiber',
+    FIVEG = '5g',
+    SECURITY = 'security',
+
 }
 

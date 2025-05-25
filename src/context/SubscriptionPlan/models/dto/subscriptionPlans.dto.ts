@@ -19,40 +19,18 @@ export class SubscriptionPlanCreateDto {
     @ApiProperty({
         description: 'Title of subscription plan',
         example: "Premium",
-        type: Number
-    })
-    price: number;
-
-
-    @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
         type: Boolean
     })
     isActive: boolean;
 
-
     @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
+        description: 'Plan type',
+        example: "fiber",
         type: String
     })
-    region: string;
+    planType: string;
 
-    @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
-        type: String
-    })
-    type: string;
 
-    @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
-        type: String,
-        required: false
-    })
-    sideText?: string;
 
     @ApiProperty({
         description: 'Indicate if the plan is a promotion plan',
@@ -63,35 +41,39 @@ export class SubscriptionPlanCreateDto {
     })
     isPromotionPlan: boolean;
 
-
     @ApiProperty({
-        description: 'Indicate status of the plan - Is required only for internet plan',
+        description: 'Title of subscription plan',
         example: "Premium",
-        required: true,
-
+        type: String,
+        required: false
     })
-    uploadDownloadValues?: { upload: string, download: string };
+    sideText?: string;
 
 
     @ApiProperty({
         description: 'indicate if the plan is a feature plan- Is required only for internet plan',
         example: "Premium",
         type: Boolean,
-        required: true,
+        required: false,
 
     })
-    isFeature: boolean;
-
-
+    isFeature?: boolean;
 
     @ApiProperty({
-        description: 'Message of feature plan',
-        example: "message 123",
-        type: String,
-        required: false
-    })
-    featuredMessage?: string;
+        description: 'Price of subscription plan',
+        example: "Premium",
+        type: Number,
+        required: false,
 
+    })
+    price?: number;
+
+    @ApiProperty({
+        description: 'Indicate status of the plan - Is required only for internet plan',
+        example: "Premium",
+        required: false,
+    })
+    uploadDownloadValues?: { upload: string, download: string };
 
 
 }

@@ -1,10 +1,10 @@
 import { InjectModel } from "@nestjs/mongoose";
 import { SubscriptionPlanRepositoryInterface } from "./subscriptionPlan.repository.interface";
-import { CameraPlanEntity } from "../models/entity/camera.plan.entity";
+import { SecurityPlanEntity } from "../models/entity/security.plan.entity";
 import { InternetPlanEntity } from "../models/entity/internet.plan.entity";
 import { Model } from "mongoose";
 import { InternetPlanDocument, InternetPlanModel } from "../models/schema/internet.plan.schema";
-import { CameraPlanDocument, CameraPlanModel } from "../models/schema/camera.plan.schema";
+import { SecurityPlanDocument, SecurityPlanModel } from "../models/schema/security.plan.schema";
 import { SubscriptionPlanDocument, SubscriptionPlanModel } from "../models/schema/subscriptionPlan.schema";
 import { SubscriptionPlanUpdateDto } from "../models/dto/subscriptionPlanUpdate.dto";
 
@@ -14,8 +14,8 @@ export class SubscriptionPlanRepository implements SubscriptionPlanRepositoryInt
         @InjectModel(InternetPlanModel.modelName)
         private readonly internetPlanModel: Model<InternetPlanDocument>,
 
-        @InjectModel(CameraPlanModel.modelName)
-        private readonly cameraPlanModel: Model<CameraPlanDocument>,
+        @InjectModel(SecurityPlanModel.modelName)
+        private readonly securityPlanModel: Model<SecurityPlanDocument>,
 
         @InjectModel(SubscriptionPlanModel.modelName)
         private readonly subscriptionPlanModel: Model<SubscriptionPlanDocument>,
@@ -32,10 +32,10 @@ export class SubscriptionPlanRepository implements SubscriptionPlanRepositoryInt
             throw error;
         }
     }
-    async saveCameraPlan(cameraPlan: CameraPlanEntity): Promise<any> {
+    async saveSecurityPlan(securityPlan: SecurityPlanEntity): Promise<any> {
         try {
-            const newCameraPlan = new this.cameraPlanModel(cameraPlan);
-            return await newCameraPlan.save();
+            const newSecurityPlan = new this.securityPlanModel(securityPlan);
+            return await newSecurityPlan.save();
         } catch (error: any) {
             throw error;
         }

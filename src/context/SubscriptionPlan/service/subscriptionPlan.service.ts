@@ -5,7 +5,7 @@ import { SubscriptionPlanCreateDto } from "../models/dto/subscriptionPlans.dto";
 import { SubscriptionPlanRepositoryInterface } from "../repository/subscriptionPlan.repository.interface";
 import { SubscriptionPlanServiceInterface } from "./subscriptionPlan.service.interface";
 import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
-import { CameraPlanEntity } from "../models/entity/camera.plan.entity";
+import { SecurityPlanEntity } from "../models/entity/security.plan.entity";
 import { InternetPlanEntity } from "../models/entity/internet.plan.entity";
 import { SubscriptionPlan } from "../models/entity/subscriptionPlan.entity";
 import { PlanType } from "../models/entity/enums/planType.enum";
@@ -24,27 +24,27 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
     async createSubscriptionPlan(subscriptionPlanDto: SubscriptionPlanCreateDto): Promise<any> {
         try {
             UbnetLoggerService.getInstance().log('Creating new plan: ' + subscriptionPlanDto.title);
-            if (!subscriptionPlanDto.type) {
-                UbnetLoggerService.getInstance().error("Plan type is required");
-                throw new BadRequestException("Plan type is required");
+            if (!subscriptionPlanDto.planType) {
+                UbnetLoggerService.getInstance().error("Plan planType is required");
+                throw new BadRequestException("Plan planType is required");
             }
 
-            if (subscriptionPlanDto.type === PlanType.FIBER || subscriptionPlanDto.type === PlanType.FIVEG) {
+            if (subscriptionPlanDto.planType === PlanType.FIBER || subscriptionPlanDto.planType === PlanType.FIVEG) {
                 const internetPlan = this.makeInternetSubscription(subscriptionPlanDto);
                 const interetPlanCreated = await this.subscriptionPlanRepository.saveInternetPlan(internetPlan);
-                UbnetLoggerService.getInstance().log(subscriptionPlanDto.type + ' plan saved Successfully');
+                UbnetLoggerService.getInstance().log(subscriptionPlanDto.planType + ' plan saved Successfully');
                 return interetPlanCreated;
 
-            } else if (subscriptionPlanDto.type === PlanType.CAMERA) {
-                const cameraPlan = this.makeCameraSubscription(subscriptionPlanDto);
-                const cameraPlanCreated = await this.subscriptionPlanRepository.saveCameraPlan(cameraPlan);
-                UbnetLoggerService.getInstance().log(PlanType.CAMERA + ' plan saved Successfully');
-                return cameraPlanCreated;
+            } else if (subscriptionPlanDto.planType === PlanType.SECURITY) {
+                const securityPlan = this.makeSecuritySubscription(subscriptionPlanDto);
+                const securityPlanCreated = await this.subscriptionPlanRepository.saveSecurityPlan(securityPlan);
+                UbnetLoggerService.getInstance().log(PlanType.SECURITY + ' plan saved Successfully');
+                return securityPlanCreated;
             }
 
 
-            UbnetLoggerService.getInstance().error("Plan type is invalid");
-            throw new BadRequestException("Plan type is invalid");
+            UbnetLoggerService.getInstance().error("Plan planType is invalid");
+            throw new BadRequestException("Plan planType is invalid");
 
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error creating plan: ' + error.message);
@@ -57,15 +57,16 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
     private makeInternetSubscription(subscriptionPlanDto: SubscriptionPlanCreateDto): InternetPlanEntity {
         const basePlanSubscription = this.makeBasePlan(subscriptionPlanDto);
 
-        if (!subscriptionPlanDto.uploadDownloadValues || subscriptionPlanDto.isFeature) {
-            throw new BadRequestException("uploadDownloadValues and isFeature is required for internet plan");
+        if (!subscriptionPlanDto.uploadDownloadValues) {
+            throw new BadRequestException("uploadDownloadValues  is required for internet plan");
         }
-        return new InternetPlanEntity(basePlanSubscription, subscriptionPlanDto.isFeature, subscriptionPlanDto.uploadDownloadValues!);
+        return new InternetPlanEntity(basePlanSubscription, subscriptionPlanDto.uploadDownloadValues!);
     }
 
-    private makeCameraSubscription(subscriptionPlanDto: SubscriptionPlanCreateDto): CameraPlanEntity {
+    private makeSecuritySubscription(subscriptionPlanDto: SubscriptionPlanCreateDto): SecurityPlanEntity {
         const basePlanSubscription = this.makeBasePlan(subscriptionPlanDto);
-        return new CameraPlanEntity(basePlanSubscription);
+        if (!subscriptionPlanDto.price) throw new BadRequestException("Price is required");
+        return new SecurityPlanEntity(basePlanSubscription, subscriptionPlanDto.price);
     }
 
 
@@ -73,13 +74,11 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
         return new SubscriptionPlan(
             subscriptionPlanDto.title,
             subscriptionPlanDto.detail,
-            subscriptionPlanDto.price,
             subscriptionPlanDto.isActive,
-            subscriptionPlanDto.region,
-            subscriptionPlanDto.type,
-            subscriptionPlanDto.isPromotionPlan,
+            subscriptionPlanDto.planType,
+            subscriptionPlanDto.isPromotionPlan ?? false,
             subscriptionPlanDto.sideText,
-            subscriptionPlanDto.featuredMessage
+            subscriptionPlanDto.isFeature
         );
     }
 
