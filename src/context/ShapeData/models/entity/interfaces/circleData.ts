@@ -1,7 +1,7 @@
-export interface CircleData {
-    center: {
-      lat: number;
-      lng: number;
-    };
-    radius: number;
-  }
+export class CircleData {
+  center: {
+    lat: number;
+    lng: number;
+  };
+  radius: number;
+}

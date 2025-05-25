@@ -11,9 +11,9 @@ export class SubscriptionPlanUpdateDto {
     @ApiProperty({
         description: 'Updated description of plan features and benefits',
         example: "200MB symmetric fiber + 100 TV channels",
-        type: String
+        type: [String]
     })
-    detail?: string;
+    detail?: string[];
 
     @ApiProperty({
         description: 'Updated monthly price of the plan',
@@ -37,13 +37,6 @@ export class SubscriptionPlanUpdateDto {
     })
     sideText?: string;
 
-    @ApiProperty({
-        description: 'Flag to indicate if this is a limited-time promotional plan',
-        example: false,
-        type: Boolean,
-        required: true
-    })
-    isPromotionPlan?: boolean;
 
     @ApiProperty({
         description: 'Updated speed values (required for internet plans)',

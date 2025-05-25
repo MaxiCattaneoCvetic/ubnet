@@ -9,11 +9,11 @@ export class SubscriptionPlanCreateDto {
     title: string;
 
     @ApiProperty({
-        description: 'Detailed description of what the plan includes',
-        example: "Includes 50MB internet speed and basic TV channels",
-        type: String
+        description: 'ed description of what the plan includes',
+        example: "[Includes 50MB internet speed and basic TV channels, no phone service]",
+        type: [String]
     })
-    detail: string;
+    detail: string[];
 
     @ApiProperty({
         description: 'Whether the plan is currently active and available for subscription',
@@ -28,14 +28,6 @@ export class SubscriptionPlanCreateDto {
         type: String
     })
     planType: string;
-
-    @ApiProperty({
-        description: 'Flag indicating if this plan is a special promotional offer',
-        example: false,
-        type: Boolean,
-        required: true
-    })
-    isPromotionPlan: boolean;
 
     @ApiProperty({
         description: 'Optional additional text or tagline for the plan',

@@ -29,7 +29,7 @@ interface ShapeDataDocument extends Document {
         radius: number;
     };
     polygon?: {
-        path: Array<{ lat: number; lng: number }>;
+        path: { lat: number; lng: number }[];
     };
 }
 

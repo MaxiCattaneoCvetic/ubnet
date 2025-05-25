@@ -10,17 +10,14 @@ export class SubscriptionPlanDocument extends Document {
     @Prop({ type: String, required: true })
     title: string;
 
-    @Prop({ type: String, required: true })
-    detail: string;
+    @Prop([{ type: String, required: true }])
+    detail: string[];
 
     @Prop({ type: Boolean, required: true })
     isActive: boolean;
 
     @Prop({ type: String, enum: [PlanType.SECURITY, PlanType.FIBER, PlanType.FIVEG], required: true })
     planType: PlanType;
-
-    @Prop({ type: Boolean, required: true, default: false })
-    isPromotionPlan: boolean;
 
     @Prop({ type: String, required: false })
     sideText?: string;

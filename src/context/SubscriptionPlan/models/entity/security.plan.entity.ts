@@ -9,7 +9,6 @@ export class SecurityPlanEntity extends SubscriptionPlan {
             subscriptionPlan.getDetail,
             subscriptionPlan.getIsActive,
             subscriptionPlan.getPlanType,
-            subscriptionPlan.getIsPromotionPlan,
             subscriptionPlan.getSideText,
             subscriptionPlan.getIsFeature
         );

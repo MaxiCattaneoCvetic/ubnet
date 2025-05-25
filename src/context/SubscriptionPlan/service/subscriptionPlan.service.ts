@@ -88,7 +88,6 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
             subscriptionPlanDto.detail,
             subscriptionPlanDto.isActive,
             subscriptionPlanDto.planType,
-            subscriptionPlanDto.isPromotionPlan ?? false,
             subscriptionPlanDto.sideText,
             subscriptionPlanDto.isFeature
         );

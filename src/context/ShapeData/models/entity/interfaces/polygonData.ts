@@ -1,4 +1,4 @@
-export interface PolygonData {
+export class PolygonData {
     path: {
         lat: number;
         lng: number;
