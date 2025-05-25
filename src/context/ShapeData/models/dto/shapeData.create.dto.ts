@@ -16,7 +16,8 @@ export class ShapeDataCreateDto {
     clientId: string;
 }
 
-export class ShapeDataCircleCreateDto extends ShapeDataCreateDto {
+
+export class ShapeDataCircle {
     @ApiProperty({
         description: 'Centro del círculo (latitud y longitud)',
         type: 'object',
@@ -38,26 +39,20 @@ export class ShapeDataCircleCreateDto extends ShapeDataCreateDto {
     radius: number;
 }
 
+export class ShapeDataCircleCreateDto extends ShapeDataCreateDto {
+    @ApiProperty({
+        description: 'Datos del círculo',
+        type: ShapeDataCircle,
+    })
+    circle: ShapeDataCircle;
+}
+
 export class ShapeDataCircleUpdateDto extends ShapeDataCreateDto {
     @ApiProperty({
-        description: 'Centro del círculo (latitud y longitud)',
-        type: 'object',
-        properties: {
-            lat: { type: 'number', example: -34.603722 },
-            lng: { type: 'number', example: -58.381592 },
-        },
+        description: 'Datos del círculo',
+        type: ShapeDataCircle,
     })
-    center: {
-        lat: number;
-        lng: number;
-    };
-
-
-    @ApiProperty({
-        description: 'Radio del circulo',
-        example: 1000,
-    })
-    radius: number;
+    circle: ShapeDataCircle;
 
 
     @ApiProperty({
@@ -69,7 +64,8 @@ export class ShapeDataCircleUpdateDto extends ShapeDataCreateDto {
 }
 
 
-export class ShapeDataPolygonCreateDto extends ShapeDataCreateDto {
+
+export class PolygonData {
     @ApiProperty({
         description: 'Lista de coordenadas que forman el poligono',
         type: 'array',
@@ -86,25 +82,24 @@ export class ShapeDataPolygonCreateDto extends ShapeDataCreateDto {
         lng: number;
     }[];
 }
+export class ShapeDataPolygonCreateDto extends ShapeDataCreateDto {
+
+    @ApiProperty({
+        description: 'Datos del poligono',
+        type: PolygonData,
+    })
+    polygon: PolygonData;
+
+}
 
 
 
 export class ShapeDataPolygonUpdateDto extends ShapeDataCreateDto {
     @ApiProperty({
-        description: 'Lista de coordenadas que forman el poligono',
-        type: 'array',
-        items: {
-            type: 'object',
-            properties: {
-                lat: { type: 'number', example: -34.603722 },
-                lng: { type: 'number', example: -58.381592 },
-            },
-        },
+        description: 'Datos del poligono',
+        type: PolygonData,
     })
-    path: {
-        lat: number;
-        lng: number;
-    }[];
+    polygon: PolygonData;
 
 
     @ApiProperty({

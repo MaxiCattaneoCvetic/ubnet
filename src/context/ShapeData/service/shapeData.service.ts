@@ -14,9 +14,10 @@ export class ShapeDataService implements ShapeDataServiceInterface {
         private readonly shapeDataRepository: ShapeDataRepositoryInterface
     ) { }
 
+
     async createZoneCoverageShapes(shapeDataCreateDto: (ShapeDataCircleCreateDto | ShapeDataPolygonCreateDto)[]): Promise<any> {
         try {
-            UbnetLoggerService.getInstance().log("Creating zones coverage shapes:"!!!);
+            UbnetLoggerService.getInstance().log("Creating zones coverage shapes:");
             const { arrayCircleZones, arrayPolygonZones } = this.qualifyZonesOfCoverage(shapeDataCreateDto)
 
             if (arrayCircleZones && arrayCircleZones.length > 0) {
@@ -67,10 +68,10 @@ export class ShapeDataService implements ShapeDataServiceInterface {
         try {
             const circleData = {
                 center: {
-                    lat: shapeDataCreateDto.center.lat,
-                    lng: shapeDataCreateDto.center.lng
+                    lat: shapeDataCreateDto.circle.center.lat,
+                    lng: shapeDataCreateDto.circle.center.lng
                 },
-                radius: shapeDataCreateDto.radius
+                radius: shapeDataCreateDto.circle.radius
             }
             const shapeCircleData = new ShapeData(
                 shapeDataCreateDto.type,
@@ -88,7 +89,7 @@ export class ShapeDataService implements ShapeDataServiceInterface {
         try {
             const polygonData = {
                 polygon: {
-                    path: shapeDataCreateDto.path
+                    path: shapeDataCreateDto.polygon.path
                 }
             }
             const shapePolygonData = new ShapeData(
@@ -104,6 +105,21 @@ export class ShapeDataService implements ShapeDataServiceInterface {
         }
     }
 
+    async deleteCoverageShapesByIds(ids: string[]): Promise<any> {
+        try {
+            UbnetLoggerService.getInstance().log('Deleting zone coverage shapes');
+            if (!ids || ids.length === 0) {
+                UbnetLoggerService.getInstance().warn('No ids to delete');
+                return { message: "No ids to delete" }
+            }
+            await this.shapeDataRepository.deleteCoverageShapesByIds(ids);
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error deleting zone coverage shapes: ' + error);
+            throw error;
+
+        }
+    }
+
 
     private async updateZoneCoverageShapes_CIRCLE_TYPE(shapeDataCircleUpdateDto: ShapeDataCircleUpdateDto): Promise<any> {
         try {
@@ -113,10 +129,10 @@ export class ShapeDataService implements ShapeDataServiceInterface {
 
             const circleData = {
                 center: {
-                    lat: shapeDataCircleUpdateDto.center.lat,
-                    lng: shapeDataCircleUpdateDto.center.lng
+                    lat: shapeDataCircleUpdateDto.circle.center.lat,
+                    lng: shapeDataCircleUpdateDto.circle.center.lng
                 },
-                radius: shapeDataCircleUpdateDto.radius
+                radius: shapeDataCircleUpdateDto.circle.radius
             }
             const shapeCircleData = new ShapeData(
                 shapeDataCircleUpdateDto.type,
@@ -125,7 +141,7 @@ export class ShapeDataService implements ShapeDataServiceInterface {
                 undefined,
                 shapeDataCircleUpdateDto._id
             )
-            return await this.shapeDataRepository.save(shapeCircleData);
+            return await this.shapeDataRepository.update(shapeCircleData);
 
         } catch (error: any) {
             UbnetLoggerService.getInstance().error('Error updating zone coverage shapes type: ' + shapeDataCircleUpdateDto.type, error);
@@ -140,7 +156,7 @@ export class ShapeDataService implements ShapeDataServiceInterface {
             }
             const polygonData = {
                 polygon: {
-                    path: shapeDataUpdateDto.path
+                    path: shapeDataUpdateDto.polygon.path
                 }
             }
             const shapePolygonData = new ShapeData(

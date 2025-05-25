@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Inject, Post, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiResponse, getSchemaPath } from "@nestjs/swagger";
 
 import { ShapeDataServiceInterface } from "../service/shapeData.service.interface";
@@ -68,6 +68,18 @@ export class ShapeDataController {
     async getAllCoverageShapes(
     ): Promise<ShapeDataResponseDto> {
         return this.shapeDataService.getAllCoverageShapes();
+    }
+
+
+
+    @Delete()
+    @HttpCode(HttpStatus.OK)
+    @ApiResponse({ status: 200, description: 'deleted successfully' })
+    @ApiResponse({ status: 400, description: 'Bad Request' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error' })
+    async deleteCoverageShapesByIds(@Body() ids: string[]
+    ): Promise<any> {
+        return this.shapeDataService.deleteCoverageShapesByIds(ids);
     }
 
 

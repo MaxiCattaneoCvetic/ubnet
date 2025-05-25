@@ -20,4 +20,4 @@ export class InternetPlanDocument extends SubscriptionPlanDocument {
 }
 
 export const InternetPlanSchema = SchemaFactory.createForClass(InternetPlanDocument);
-export const InternetPlanModel = model<InternetPlanDocument>('InternetPlanModel', InternetPlanSchema);
+export const InternetPlanModel = model<InternetPlanDocument>('InternetPlan', InternetPlanSchema);

@@ -2,5 +2,6 @@ import { ShapeDataCircleCreateDto, ShapeDataPolygonCreateDto } from "../models/d
 
 export interface ShapeDataServiceInterface {
     createZoneCoverageShapes(shapeDataCreateDto: (ShapeDataCircleCreateDto | ShapeDataPolygonCreateDto)[]): Promise<any>;
+    deleteCoverageShapesByIds(ids: string[]): Promise<any>;
     getAllCoverageShapes(): Promise<any>;
 }

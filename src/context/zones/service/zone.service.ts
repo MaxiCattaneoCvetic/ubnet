@@ -32,6 +32,7 @@ export class ZoneService implements ZoneServiceInterface {
 
     async createZone(zoneCreateDto: ZoneDto): Promise<any> {
         try {
+
             UbnetLoggerService.getInstance().log('Creating new zone: ' + zoneCreateDto.label);
             const zoneEntity = new Zone(zoneCreateDto.label, zoneCreateDto.plans);
             return await this.zoneRepository.save(zoneEntity);

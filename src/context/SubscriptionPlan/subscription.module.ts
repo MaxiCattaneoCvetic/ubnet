@@ -36,5 +36,6 @@ import { AuthModule } from '../Shared/auth/auth.module';
             useClass: SubscriptionPlanRepository
         }
     ],
+    exports: [MongooseModule]
 })
 export class SubscriptionPlanModule { }

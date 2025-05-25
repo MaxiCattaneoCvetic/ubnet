@@ -70,7 +70,7 @@ export class SubscriptionPlanController {
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async findAllSubscriptionPlans(): Promise<any> {
         try {
-            return this.subscriptionPlanService.findAll();
+            return await this.subscriptionPlanService.findAll();
         } catch (error: any) {
             throw error;
         }

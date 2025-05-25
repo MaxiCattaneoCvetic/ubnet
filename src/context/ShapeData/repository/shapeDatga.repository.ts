@@ -12,6 +12,7 @@ export class ShapeDataRepository implements ShapeDataRepositoryInterface {
         @InjectModel(ShapeDataModel.modelName)
         private readonly shapeDataModel: Model<ShapeDataDocument>,
     ) { }
+
     async update(shapeData: ShapeData): Promise<any> {
         try {
             const _id = shapeData.getId;
@@ -34,8 +35,17 @@ export class ShapeDataRepository implements ShapeDataRepositoryInterface {
         }
     }
 
+
     async findAll(): Promise<any> {
         return await this.shapeDataModel.find().lean() ?? [];
+    }
+
+    async deleteCoverageShapesByIds(ids: string[]): Promise<any> {
+        try {
+            await this.shapeDataModel.deleteMany({ _id: { $in: ids } });
+        } catch (error: any) {
+            throw error;
+        }
     }
 
 }

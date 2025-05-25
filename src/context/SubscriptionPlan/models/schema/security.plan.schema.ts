@@ -12,4 +12,4 @@ export class SecurityPlanDocument extends SubscriptionPlanDocument {
 }
 
 export const SecurityPlanSchema = SchemaFactory.createForClass(SecurityPlanDocument);
-export const SecurityPlanModel = model<SecurityPlanDocument>('SecurityPlanModel', SecurityPlanSchema);
+export const SecurityPlanModel = model<SecurityPlanDocument>('SecurityPlan', SecurityPlanSchema);

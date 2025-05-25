@@ -26,7 +26,7 @@ export class ZoneController {
     @ApiResponse({ status: 201, description: 'Zone has been created', type: ZoneReponseDto })
     @ApiResponse({ status: 400, description: 'Plan has not been created, check your payload' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
-    async createSubscriptionPlan(zone: ZoneDto): Promise<any> {
+    async createSubscriptionPlan(@Body() zone: ZoneDto): Promise<any> {
         try {
             return await this.zoneService.createZone(zone);
         } catch (error: any) {

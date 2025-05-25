@@ -27,4 +27,4 @@ export class SubscriptionPlanDocument extends Document {
 }
 
 export const SubscriptionPlanSchema = SchemaFactory.createForClass(SubscriptionPlanDocument);
-export const SubscriptionPlanModel = model<SubscriptionPlanDocument>('SubscriptionPlanModel', SubscriptionPlanSchema);
+export const SubscriptionPlanModel = model<SubscriptionPlanDocument>('SubscriptionPlan', SubscriptionPlanSchema);
