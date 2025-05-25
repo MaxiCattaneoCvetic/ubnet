@@ -21,6 +21,14 @@ export class SubscriptionPlanRepository implements SubscriptionPlanRepositoryInt
         private readonly subscriptionPlanModel: Model<SubscriptionPlanDocument>,
 
     ) { }
+    async deletePlanById(id: string): Promise<any> {
+        try {
+            const result = await this.subscriptionPlanModel.deleteOne({ _id: id });
+            return result.deletedCount > 0;
+        } catch (error: any) {
+            throw error;
+        }
+    }
 
 
 

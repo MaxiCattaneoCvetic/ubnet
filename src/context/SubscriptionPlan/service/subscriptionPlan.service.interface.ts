@@ -6,4 +6,5 @@ export interface SubscriptionPlanServiceInterface {
     updateSubscriptionPlanById(id: string, subscriptionPlanUpdateDto: SubscriptionPlanUpdateDto): Promise<any>
     findById(id: string): Promise<any>
     findAll(): Promise<any>
+    deletePlanById(id: string): Promise<any>
 }

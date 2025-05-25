@@ -19,6 +19,18 @@ export class SubscriptionPlanService implements SubscriptionPlanServiceInterface
         private readonly subscriptionPlanRepository: SubscriptionPlanRepositoryInterface,
 
     ) { }
+    async deletePlanById(id: string): Promise<any> {
+        try {
+            UbnetLoggerService.getInstance().log('Deleting plan: ' + id);
+            const planDeleted = await this.subscriptionPlanRepository.deletePlanById(id);
+            if (!planDeleted) return new BadRequestException("Plan not found")
+            UbnetLoggerService.getInstance().log('Plan deleted Successfully');
+            return { message: "Plan deleted Successfully" }
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error deleting plan: ' + error.message);
+            throw error;
+        }
+    }
 
 
     async createSubscriptionPlan(subscriptionPlanDto: SubscriptionPlanCreateDto): Promise<any> {

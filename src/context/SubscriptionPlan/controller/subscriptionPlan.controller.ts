@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Inject, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { SubscriptionPlanServiceInterface } from "../service/subscriptionPlan.service.interface";
 import { AuthGuard } from "src/context/Shared/auth/guard/auth.guard";
 import { ApiBearerAuth, ApiBody, ApiResponse } from "@nestjs/swagger";
@@ -77,5 +77,16 @@ export class SubscriptionPlanController {
     }
 
 
+    @Delete(":id")
+    @ApiResponse({ status: 200, description: 'Subscriptions Plan successfully deleted' })
+    @ApiResponse({ status: 404, description: 'Subscriptions Plan not found' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    async deletePlanById(@Param('id') id: string): Promise<any> {
+        try {
+            return this.subscriptionPlanService.findAll();
+        } catch (error: any) {
+            throw error;
+        }
+    }
 
 }  

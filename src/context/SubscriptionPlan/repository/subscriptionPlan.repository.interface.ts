@@ -8,4 +8,5 @@ export interface SubscriptionPlanRepositoryInterface {
     saveSecurityPlan(securityPlan: SecurityPlanEntity): Promise<any>;
     findAll(): Promise<any>;
     findById(id: string): Promise<any>;
+    deletePlanById(id: string): Promise<any>;
 }
