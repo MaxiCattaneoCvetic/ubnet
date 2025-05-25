@@ -12,7 +12,7 @@ export class InternetPlanEntity extends SubscriptionPlan {
         super(subscriptionPlan.getTitle,
             subscriptionPlan.getDetail,
             subscriptionPlan.getIsActive,
-            subscriptionPlan.getType,
+            subscriptionPlan.getPlanType,
             subscriptionPlan.getIsPromotionPlan,
             subscriptionPlan.getSideText,
 

@@ -35,13 +35,6 @@ export class SubscriptionPlanUpdateDto {
     @ApiProperty({
         description: 'Title of subscription plan',
         example: "Premium",
-        type: String
-    })
-    region?: string;
-
-    @ApiProperty({
-        description: 'Title of subscription plan',
-        example: "Premium",
         type: String,
         required: false
     })
@@ -75,12 +68,5 @@ export class SubscriptionPlanUpdateDto {
     })
     isFeature?: boolean;
 
-    @ApiProperty({
-        description: 'Message of feature plan',
-        example: "message 123",
-        type: String,
-        required: false
-    })
-    featuredMessage?: string;
 
 }
