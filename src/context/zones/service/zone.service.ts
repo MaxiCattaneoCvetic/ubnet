@@ -1,11 +1,12 @@
 import { Inject } from "@nestjs/common";
 
 
-import { ZoneCreateDto } from "../models/dto/zone.create.dto";
+import { ZoneDto } from "../models/dto/zone.create.dto";
 import { ZoneServiceInterface } from "./zone.service.interface";
 import { ZoneRepositoryInterface } from "../repository/zone.repository.interface";
 import { UbnetLoggerService } from "src/context/Shared/logger/logger.service";
 import { Zone } from "../models/entity/zone.entity";
+import { createObjectWithoutUndefined } from "src/context/AdvertisingBanner/function/object.factory.create";
 
 export class ZoneService implements ZoneServiceInterface {
 
@@ -16,7 +17,7 @@ export class ZoneService implements ZoneServiceInterface {
 
 
 
-    async createZone(zoneCreateDto: ZoneCreateDto): Promise<any> {
+    async createZone(zoneCreateDto: ZoneDto): Promise<any> {
         try {
             UbnetLoggerService.getInstance().log('Creating new zone: ' + zoneCreateDto.name);
             const zoneEntity = new Zone(zoneCreateDto.name, zoneCreateDto.plans);
@@ -49,6 +50,17 @@ export class ZoneService implements ZoneServiceInterface {
             throw error;
         }
     }
+
+    async updateZoneById(id: string, zoneUpdateDto: ZoneDto): Promise<any> {
+        try {
+            UbnetLoggerService.getInstance().log('Updating zone: ' + id);
+            const objetToUpdate = createObjectWithoutUndefined(zoneUpdateDto);
+            return await this.zoneRepository.updateZoneById(id, objetToUpdate);
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
 
 
 }

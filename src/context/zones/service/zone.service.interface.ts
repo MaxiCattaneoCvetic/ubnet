@@ -1,7 +1,8 @@
-import { ZoneCreateDto } from "../models/dto/zone.create.dto";
+import { ZoneDto } from "../models/dto/zone.create.dto";
 
 export interface ZoneServiceInterface {
-    createZone(zoneCreateDto: ZoneCreateDto): Promise<any>
+    createZone(zoneCreateDto: ZoneDto): Promise<any>
     getZonesWhithPlans(): Promise<any>
     getZonesByName(name: string): Promise<any>
+    updateZoneById(id: string, zoneUpdateDto: ZoneDto): Promise<any>
 }

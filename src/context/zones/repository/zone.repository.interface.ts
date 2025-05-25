@@ -4,4 +4,5 @@ export interface ZoneRepositoryInterface {
     save(zoneCreateDto: Zone): Promise<any>;
     getZonesWhithPlans(): Promise<any>;
     getZonesByName(name: string): Promise<any>;
+    updateZoneById(id: string, zoneUpdateDto: Object): Promise<any>;
 }

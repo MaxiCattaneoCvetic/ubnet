@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger"
 import { Types } from "mongoose"
 import { SubscriptionPlanResponseDto } from "src/context/SubscriptionPlan/models/dto/subscriptionPlans.dto"
 
-export class ZoneCreateDto {
+export class ZoneDto {
     @ApiProperty({
         description: 'Name of the zone',
         example: "Comodoro Rivadavia",
@@ -17,6 +17,8 @@ export class ZoneCreateDto {
     })
     plans: Types.ObjectId[]
 }
+
+
 
 export class ZoneReponseDto {
     @ApiProperty({
