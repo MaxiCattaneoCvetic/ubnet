@@ -83,7 +83,7 @@ export class SubscriptionPlanController {
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     async deletePlanById(@Param('id') id: string): Promise<any> {
         try {
-            return this.subscriptionPlanService.findAll();
+            return this.subscriptionPlanService.deletePlanById(id);
         } catch (error: any) {
             throw error;
         }
