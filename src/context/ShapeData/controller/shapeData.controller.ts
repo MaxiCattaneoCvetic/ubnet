@@ -77,6 +77,8 @@ export class ShapeDataController {
     @ApiResponse({ status: 200, description: 'deleted successfully' })
     @ApiResponse({ status: 400, description: 'Bad Request' })
     @ApiResponse({ status: 500, description: 'Internal Server Error' })
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth('JWT-auth')
     async deleteCoverageShapesByIds(@Body() ids: string[]
     ): Promise<any> {
         return this.shapeDataService.deleteCoverageShapesByIds(ids);

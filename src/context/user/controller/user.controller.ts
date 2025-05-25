@@ -4,6 +4,13 @@ import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { UserRegisterDto, UserRegisterDto_response } from "../models/dto/user.register.dto";
 import { UserServiceInterface } from "../service/user.service.interface";
 
+
+
+/*
+
+Is not active
+
+*/
 @Controller('register')
 export class UserController {
 
@@ -20,7 +27,8 @@ export class UserController {
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     register(@Body() userDto: UserRegisterDto) {
         try {
-            return this.userService.register(userDto);
+            return null;
+            // return this.userService.register(userDto);
         } catch (error: any) {
             throw error;
         }

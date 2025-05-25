@@ -70,6 +70,8 @@ export class ZoneController {
     @ApiResponse({ status: 200, description: 'Zones updated successfully', type: ZoneResponseWithPlansDto })
     @ApiResponse({ status: 404, description: 'Zones not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth('JWT-auth')
     async updateZoneById(@Param('id') id: string, @Body() zoneUpdateDto: ZoneDto): Promise<any> {
         try {
             return this.zoneService.updateZoneById(id, zoneUpdateDto);
@@ -84,6 +86,8 @@ export class ZoneController {
     @ApiResponse({ status: 200, description: 'Zones deleted successfully' })
     @ApiResponse({ status: 404, description: 'Zones not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth('JWT-auth')
     async deleteZoneById(@Param('id') id: string): Promise<any> {
         try {
             return this.zoneService.deleteZoneById(id);

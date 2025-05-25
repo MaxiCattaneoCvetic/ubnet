@@ -39,6 +39,8 @@ export class SubscriptionPlanController {
     @ApiResponse({ status: 400, description: 'Bad request, request body is invalid' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     @ApiBody({ type: SubscriptionPlanUpdateDto })
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth('JWT-auth')
     async updateSubscriptionPlanById(@Param('id') id: string, @Body() subscriptionPlanUpdateDto: SubscriptionPlanUpdateDto): Promise<any> {
         try {
             return this.subscriptionPlanService.updateSubscriptionPlanById(id, subscriptionPlanUpdateDto);
@@ -81,6 +83,8 @@ export class SubscriptionPlanController {
     @ApiResponse({ status: 200, description: 'Subscriptions Plan successfully deleted' })
     @ApiResponse({ status: 404, description: 'Subscriptions Plan not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    @UseGuards(AuthGuard)
+    @ApiBearerAuth('JWT-auth')
     async deletePlanById(@Param('id') id: string): Promise<any> {
         try {
             return this.subscriptionPlanService.deletePlanById(id);
