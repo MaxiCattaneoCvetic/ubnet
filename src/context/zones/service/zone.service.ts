@@ -1,4 +1,4 @@
-import { Inject } from "@nestjs/common";
+import { BadRequestException, Inject } from "@nestjs/common";
 
 
 import { ZoneDto } from "../models/dto/zone.create.dto";
@@ -14,6 +14,19 @@ export class ZoneService implements ZoneServiceInterface {
         @Inject("ZoneRepositoryInterface")
         private readonly zoneRepository: ZoneRepositoryInterface
     ) { }
+    async deleteZoneById(id: string): Promise<any> {
+        try {
+            UbnetLoggerService.getInstance().log('Deleting zone: ' + id);
+            const zoneDeleted = await this.zoneRepository.deleteZoneById(id);
+            if (!zoneDeleted) return new BadRequestException("Zone not found")
+            UbnetLoggerService.getInstance().log('Zone deleted Successfully');
+            return { message: "Zone deleted Successfully" }
+
+        } catch (error: any) {
+            UbnetLoggerService.getInstance().error('Error deleting zone: ' + id, error);
+            throw error;
+        }
+    }
 
 
 

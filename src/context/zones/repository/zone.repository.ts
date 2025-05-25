@@ -13,6 +13,15 @@ export class ZoneRepository implements ZoneRepositoryInterface {
         private readonly zoneDocument: Model<ZoneDocument>,
 
     ) { }
+    async deleteZoneById(id: string): Promise<any> {
+        try {
+            const result = await this.zoneDocument.deleteOne({ _id: id });
+            return result.deletedCount > 0
+        }
+        catch (error: any) {
+            throw error;
+        }
+    }
 
 
     async save(zoneCreateDto: Zone): Promise<any> {

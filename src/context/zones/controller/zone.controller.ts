@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Inject, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiBody, ApiResponse } from "@nestjs/swagger";
 
 
@@ -73,6 +73,20 @@ export class ZoneController {
     async updateZoneById(@Param('id') id: string, @Body() zoneUpdateDto: ZoneDto): Promise<any> {
         try {
             return this.zoneService.updateZoneById(id, zoneUpdateDto);
+        } catch (error: any) {
+            throw error;
+        }
+    }
+
+
+    @Delete(":id")
+    @HttpCode(HttpStatus.OK)
+    @ApiResponse({ status: 200, description: 'Zones deleted successfully' })
+    @ApiResponse({ status: 404, description: 'Zones not found' })
+    @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
+    async deleteZoneById(@Param('id') id: string): Promise<any> {
+        try {
+            return this.zoneService.deleteZoneById(id);
         } catch (error: any) {
             throw error;
         }
