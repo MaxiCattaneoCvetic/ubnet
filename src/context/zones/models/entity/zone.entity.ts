@@ -1,11 +1,11 @@
 import { Types } from "mongoose";
 
 export class Zone {
-    private name: string;
+    private label: string;
     private plans: Types.ObjectId[];
 
-    constructor(name: string, plans: Types.ObjectId[]) {
-        this.name = name;
+    constructor(label: string, plans: Types.ObjectId[]) {
+        this.label = label;
         this.plans = plans;
     }
 

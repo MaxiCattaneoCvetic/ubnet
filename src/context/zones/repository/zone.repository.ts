@@ -49,10 +49,10 @@ export class ZoneRepository implements ZoneRepositoryInterface {
         }
     }
 
-    async getZonesByName(name: string): Promise<any> {
+    async getZonesByName(label: string): Promise<any> {
         try {
             return await this.zoneDocument
-                .find({ name })
+                .find({ label })
                 .populate({
                     path: 'plans',
                     match: { isActive: true }

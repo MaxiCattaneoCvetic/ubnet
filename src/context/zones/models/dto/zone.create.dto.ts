@@ -4,11 +4,11 @@ import { SubscriptionPlanResponseDto } from "src/context/SubscriptionPlan/models
 
 export class ZoneDto {
     @ApiProperty({
-        description: 'Name of the zone',
+        description: 'label of the zone',
         example: "Comodoro Rivadavia",
         type: String
     })
-    name: string
+    label: string
 
     @ApiProperty({
         description: 'Plans of the zone',
@@ -28,10 +28,10 @@ export class ZoneReponseDto {
     _id: string
 
     @ApiProperty({
-        description: 'Name of the zone',
+        description: 'label of the zone',
         type: String
     })
-    name: string
+    label: string
 
     @ApiProperty({
         description: 'Plans of the zone',
@@ -52,10 +52,10 @@ export class ZoneResponseWithPlansDto {
     _id: string
 
     @ApiProperty({
-        description: 'Name of the zone',
+        description: 'label of the zone',
         type: String
     })
-    name: string
+    label: string
 
 
     @ApiProperty({

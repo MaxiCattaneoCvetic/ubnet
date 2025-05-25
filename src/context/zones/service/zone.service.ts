@@ -32,11 +32,11 @@ export class ZoneService implements ZoneServiceInterface {
 
     async createZone(zoneCreateDto: ZoneDto): Promise<any> {
         try {
-            UbnetLoggerService.getInstance().log('Creating new zone: ' + zoneCreateDto.name);
-            const zoneEntity = new Zone(zoneCreateDto.name, zoneCreateDto.plans);
+            UbnetLoggerService.getInstance().log('Creating new zone: ' + zoneCreateDto.label);
+            const zoneEntity = new Zone(zoneCreateDto.label, zoneCreateDto.plans);
             return await this.zoneRepository.save(zoneEntity);
         } catch (error: any) {
-            UbnetLoggerService.getInstance().error('Error creating zone: ' + zoneCreateDto.name, error);
+            UbnetLoggerService.getInstance().error('Error creating zone: ' + zoneCreateDto.label, error);
             throw error;
         }
     }
@@ -53,13 +53,13 @@ export class ZoneService implements ZoneServiceInterface {
     }
 
 
-    async getZonesByName(name: string): Promise<any> {
+    async getZonesByName(label: string): Promise<any> {
         try {
-            if (!name) return null;
-            UbnetLoggerService.getInstance().log("Finding all zones by name" + name);
-            return await this.zoneRepository.getZonesByName(name);
+            if (!label) return null;
+            UbnetLoggerService.getInstance().log("Finding all zones by label" + label);
+            return await this.zoneRepository.getZonesByName(label);
         } catch (error: any) {
-            UbnetLoggerService.getInstance().error("Error finding all zones by name" + name, error);
+            UbnetLoggerService.getInstance().error("Error finding all zones by label" + label, error);
             throw error;
         }
     }

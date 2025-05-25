@@ -15,7 +15,7 @@ import { AuthModule } from '../Shared/auth/auth.module';
     imports: [
         MongooseModule.forFeature([
             {
-                name: ZoneModel.modelName,
+                label: ZoneModel.modelName,
                 schema: ZoneModel.schema,
             },
         ]),

@@ -2,13 +2,13 @@ import { Schema, model, Document, Types } from 'mongoose';
 
 
 interface ZoneDocument extends Document {
-    name: string;
+    label: string;
     plans: Types.ObjectId[]
 }
 
 
 const ZoneSchema = new Schema<ZoneDocument>({
-    name: { type: String, required: true },
+    label: { type: String, required: true },
     plans: { type: [Types.ObjectId], ref: 'SubscriptionPlan', required: true }
 })
 

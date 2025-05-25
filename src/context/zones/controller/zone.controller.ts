@@ -49,14 +49,14 @@ export class ZoneController {
     }
 
 
-    @Get(":name")
+    @Get(":label")
     @HttpCode(HttpStatus.OK)
     @ApiResponse({ status: 200, description: 'Zones found', type: ZoneResponseWithPlansDto })
     @ApiResponse({ status: 404, description: 'Zones not found' })
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
-    async getZonesByName(@Param('name') name: string): Promise<any> {
+    async getZonesByName(@Param('label') label: string): Promise<any> {
         try {
-            return this.zoneService.getZonesByName(name);
+            return this.zoneService.getZonesByName(label);
         } catch (error: any) {
             throw error;
         }
