@@ -27,7 +27,10 @@ export class ZoneRepository implements ZoneRepositoryInterface {
     async save(zoneCreateDto: Zone): Promise<any> {
         try {
             const zoneDocument = new this.zoneDocument(zoneCreateDto);
-            return await zoneDocument.save();
+            return (await zoneDocument.save()).populate({
+                path: 'plans',
+                match: { isActive: true }
+            });
         } catch (error: any) {
             throw error;
         }
