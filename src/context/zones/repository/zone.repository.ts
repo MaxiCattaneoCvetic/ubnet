@@ -66,7 +66,10 @@ export class ZoneRepository implements ZoneRepositoryInterface {
     async updateZoneById(id: string, zoneUpdateDto: Object): Promise<any> {
         try {
             return await this.zoneDocument
-                .findByIdAndUpdate({ _id: id }, zoneUpdateDto, { new: true });
+                .findByIdAndUpdate({ _id: id }, zoneUpdateDto, { new: true }).populate({
+                    path: 'plans',
+                    match: { isActive: true }
+                });
         } catch (error: any) {
             throw error;
         }
