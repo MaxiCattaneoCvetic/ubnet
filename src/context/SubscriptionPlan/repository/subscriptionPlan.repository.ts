@@ -73,7 +73,7 @@ export class SubscriptionPlanRepository implements SubscriptionPlanRepositoryInt
 
     async updateSubscriptionPlanById(id: string, subscriptionPlanUpdateDto: Partial<SubscriptionPlanUpdateDto>): Promise<any> {
         try {
-            return await this.subscriptionPlanModel.updateOne({ _id: id }, subscriptionPlanUpdateDto);
+            return await this.subscriptionPlanModel.updateOne({ _id: id }, subscriptionPlanUpdateDto, { new: true });
         } catch (error: any) {
             throw error;
         }
