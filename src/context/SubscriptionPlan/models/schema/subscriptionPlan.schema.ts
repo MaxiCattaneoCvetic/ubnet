@@ -22,8 +22,8 @@ export class SubscriptionPlanDocument extends Document {
     @Prop({ type: String, required: false })
     sideText?: string;
 
-    @Prop({ type: String, required: false })
-    isFeature?: string
+    @Prop({ type: Boolean, required: false })
+    isFeature?: boolean
 }
 
 export const SubscriptionPlanSchema = SchemaFactory.createForClass(SubscriptionPlanDocument);
