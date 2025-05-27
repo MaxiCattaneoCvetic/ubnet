@@ -17,7 +17,7 @@ export class ShapeDataRepository implements ShapeDataRepositoryInterface {
         try {
             const _id = shapeData.getId;
             const shapeDataDocument = new this.shapeDataModel(shapeData);
-            await this.shapeDataModel.updateOne({ _id }, shapeDataDocument);
+            return await this.shapeDataModel.findByIdAndUpdate({ _id }, shapeDataDocument, { new: true });
         } catch (error: any) {
             throw error;
         }

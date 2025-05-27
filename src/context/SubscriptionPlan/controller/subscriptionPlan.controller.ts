@@ -43,7 +43,7 @@ export class SubscriptionPlanController {
     @ApiBearerAuth('JWT-auth')
     async updateSubscriptionPlanById(@Param('id') id: string, @Body() subscriptionPlanUpdateDto: SubscriptionPlanUpdateDto): Promise<any> {
         try {
-            return this.subscriptionPlanService.updateSubscriptionPlanById(id, subscriptionPlanUpdateDto);
+            return await this.subscriptionPlanService.updateSubscriptionPlanById(id, subscriptionPlanUpdateDto);
         } catch (error: any) {
             throw error;
         }
