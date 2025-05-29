@@ -10,6 +10,7 @@ import { UserAuthRepository } from './login/repository/auth.repository';
 import { AuthGuard } from './guard/auth.guard';
 import { UserModel } from 'src/context/User/models/schemas/user.schema';
 import { UserModule } from 'src/context/User/user.module';
+import { ServerController } from './login/controller/server.controller';
 
 @Module({
     imports: [
@@ -35,7 +36,7 @@ import { UserModule } from 'src/context/User/user.module';
             }),
         }),
     ],
-    controllers: [AuthController],
+    controllers: [AuthController, ServerController],
     providers: [
         {
             provide: 'AuthServiceInterface',
