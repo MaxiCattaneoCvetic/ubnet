@@ -27,8 +27,8 @@ export class UserController {
     @ApiResponse({ status: 500, description: 'Internal Server Error, contact the administrator' })
     register(@Body() userDto: UserRegisterDto) {
         try {
-            return this.userService.register(userDto);
             return null;
+            //return this.userService.register(userDto);
         } catch (error: any) {
             throw error;
         }
