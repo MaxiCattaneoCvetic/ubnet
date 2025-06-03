@@ -3,6 +3,7 @@ import { onRequest } from 'firebase-functions/v2/https';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ExpressAdapter, NestExpressApplication } from '@nestjs/platform-express';
 import * as express from 'express';
+import helmet from 'helmet';
 
 import { AppModule } from './app.module';
 import { ShapeDataCircleCreateDto, ShapeDataPolygonCreateDto } from './context/ShapeData/models/dto/shapeData.create.dto';
@@ -17,7 +18,45 @@ const initializeNestApp = async (): Promise<NestExpressApplication> => {
       new ExpressAdapter(expressServer),
     );
 
-    app.enableCors();
+    // 1️⃣ Helmet: aplicar antes de CORS o cualquier middleware
+    app.use(
+      helmet({
+        crossOriginEmbedderPolicy: false,
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", 'https:'],
+            styleSrc: ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
+            fontSrc: ["'self'", 'fonts.gstatic.com'],
+            imgSrc: ["'self'", 'data:', 'apollo-server-landing-page.cdn.apollographql.com'],
+            manifestSrc: ["'self'", 'apollo-server-landing-page.cdn.apollographql.com'],
+            frameSrc: ["'self'", 'sandbox.embed.apollographql.com'],
+            objectSrc: ["'none'"],
+            baseUri: ["'self'"],
+          },
+        },
+        frameguard: { action: 'sameorigin' },
+        referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+        hidePoweredBy: true,
+        noSniff: true,
+      }),
+    );
+
+
+    app.use((req, res, next) => {
+      res.setHeader(
+        'Permissions-Policy',
+        'geolocation=(), camera=(), microphone=(), payment=(), usb=()'
+      );
+      next();
+    });
+
+
+    app.enableCors({
+      origin: ['https://ubnet-client.vercel.app'],
+      credentials: true,
+    });
+
 
     const config = new DocumentBuilder()
       .setTitle('UBNET')
@@ -34,10 +73,12 @@ const initializeNestApp = async (): Promise<NestExpressApplication> => {
         },
         'JWT-auth',
       )
-
       .build();
 
-    const documentFactory = () => SwaggerModule.createDocument(app, config, { extraModels: [ShapeDataCircleCreateDto, ShapeDataPolygonCreateDto] });
+    const documentFactory = () => SwaggerModule.createDocument(app, config, {
+      extraModels: [ShapeDataCircleCreateDto, ShapeDataPolygonCreateDto],
+    });
+
     SwaggerModule.setup('api', app, documentFactory, {
       swaggerOptions: {
         persistAuthorization: true,
@@ -48,7 +89,7 @@ const initializeNestApp = async (): Promise<NestExpressApplication> => {
     console.log(`Server initialized`);
   }
   return app;
-}
+};
 
 export const api = onRequest(async (request, response) => {
   await initializeNestApp();
@@ -65,5 +106,3 @@ async function bootstrap() {
 if (process.env.NODE_ENV !== 'production') {
   bootstrap();
 }
-
-
